@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation='vertical'
+    android:weightSum="1"
+    android:background="@color/chatBackground"
+    tools:context=".activity.ChatActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/chat_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:theme="@style/AppTheme"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/my_recycler_view"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+
+
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/add_img_layout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="100dp"-->
+<!--        android:visibility="gone">-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/add_img"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:src="@drawable/fore_1"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:scaleType="fitEnd"-->
+<!--            android:layout_toStartOf="@id/img_delete_btn"/>-->
+<!--        <ImageButton-->
+<!--            android:id="@+id/img_delete_btn"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:src="@drawable/ic_cancel_light_red"-->
+<!--            android:background="@color/chatBackground"-->
+<!--            android:padding="1dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_marginLeft="1dp"-->
+<!--            android:layout_alignParentEnd="true"/>-->
+
+<!--    </RelativeLayout>-->
+    <!--    <FrameLayout-->
+    <!--        android:id="@+id/message_frame"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="5dp">-->
+
+    <!--    </FrameLayout>-->
+    <include
+        android:id="@+id/chat_box"
+        layout="@layout/bottom_message_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"/>
+</LinearLayout>

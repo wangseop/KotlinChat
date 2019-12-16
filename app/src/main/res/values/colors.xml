@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="mainTitleColor">#ACCFEE</color>
+    <color name="colorPrimary">#ACCFEE</color>
+    <color name="colorPrimaryDark">#ACCFEE</color>
+    <color name="colorAccent">#ACCFEE</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="gradientStart">#E1F8FA</color>
+    <color name="gradientCenter">#E1F8FA</color>
+    <color name="gradientEnd">#E1F8FA</color>
+    <color name="bottomBar">#ACCFEE</color>
+    <color name="bottomBarLeft">#ACCFEE</color>
+    <color name="bottomBarRight">#ACCFEE</color>
+    <color name="chatBackground">#ACCFEE</color>
+
+    <color name="popupGallery">#AB47BC</color>
+    <color name="attachmentBaseColor">#FAFAFA</color>
+    <color name="chatLeftText">#FFFFFF</color>
+    <color name="messageSingleLeft">#D3EDFD</color>
+    <color name="messageSingleRight">#F7B096</color>
+    <color name="messageImageLeft">#FFB6F0</color>
+    <color name="mapBtn">#ECE8D3</color>
+    <color name="messageImageThumbLeft">#BFE2F7</color>
+    <color name="messageImageThumbRight">#F7A080</color>
+    <color name="defaultWhite">#FFFFFD</color>
+
+    <color name="chattingColor">#e6e6e6</color>
+</resources>

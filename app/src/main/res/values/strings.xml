@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">KotlinChat</string>
+    <string name="popupGallery">Gallery</string>
+    <string name="messageSingleLeft">Default Message Single Left</string>
+    <string name="messageSingleRight">Default Message Single Right</string>
+    <string name="showMap">위치 확인</string>
+    <string name="autoLoginCheck">자동 로그인</string>
+</resources>
