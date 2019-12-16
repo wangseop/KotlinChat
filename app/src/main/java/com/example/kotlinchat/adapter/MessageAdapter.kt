@@ -2,6 +2,7 @@ package com.example.kotlinchat.adapter
 
 import android.content.Context
 import android.os.Message
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,7 @@ import com.example.kotlinchat.R
 import com.example.kotlinchat.data.chat.Chat
 import com.example.kotlinchat.viewholder.MessageViewHolder
 
-class MessageAdapter(val mChat : List<Chat>, val mContext: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class MessageAdapter(val mChat : ArrayList<Chat>, val mContext: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     private val MSG_LEFT:Int = 1
     private val MSG_RIGHT:Int = 2
@@ -27,7 +28,6 @@ class MessageAdapter(val mChat : List<Chat>, val mContext: Context) : RecyclerVi
 
         return MessageViewHolder(view)
 
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 
@@ -57,8 +57,9 @@ class MessageAdapter(val mChat : List<Chat>, val mContext: Context) : RecyclerVi
         return mChat[position].msgType
     }
 
-    public fun addChat(chat:Chat){
-        mChat.toMutableList().add(chat)
+    fun addChat(chat:Chat){
+        mChat.add(chat)
+        Log.d("Message Adapter AddChat", ""+(mChat.size-1))
         notifyItemInserted(mChat.size-1)
 
     }

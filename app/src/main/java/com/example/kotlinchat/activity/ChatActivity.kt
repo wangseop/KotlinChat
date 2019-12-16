@@ -3,6 +3,7 @@ package com.example.kotlinchat.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -33,7 +34,7 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
     private val messagePath: String = "http://221.154.145.243:5000/chatbot"
     private val messageImgPath: String = "http://221.154.145.243:5000/img"
     private lateinit var messageAdapter: MessageAdapter
-    private lateinit var mchat:List<Chat>
+    private lateinit var mchat:ArrayList<Chat>
     private lateinit var recyclerView:RecyclerView
 
 
@@ -42,7 +43,7 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_chat)
 
         var intent: Intent = this.intent
-        nick = intent.getStringExtra("nick")
+//        nick = intent.getStringExtra("nick")
 
 //        // 액션바
 //        mapActionbar = (Toolbar)findViewById(R.id.chat_toolbar);
@@ -93,9 +94,9 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun sendMessage(){
         val msg:String = editText_chat.text.toString()
-
+        Log.d("MSG", msg)
         if (msg != null){
-            val chat:Chat = Chat(MSG_RIGHT, nick, "Neck", msg);
+            val chat:Chat = Chat(MSG_RIGHT, nick, "Neck", msg)
 
             messageAdapter.addChat(chat)
             recyclerView.smoothScrollToPosition(messageAdapter.itemCount - 1)

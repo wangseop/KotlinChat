@@ -13,8 +13,8 @@ class MessageViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
     lateinit var profile_image:ImageView
     lateinit var nick:TextView
     init{
-        this.show_message = itemView.findViewById(R.id.nick)
-        this.profile_image = itemView.findViewById(R.id.show_message)
-        this.nick = itemView.findViewById(R.id.profile_image)
+        this.show_message = itemView.findViewById(R.id.show_message)
+        this.profile_image = itemView.findViewById(R.id.profile_image)
+        this.nick = itemView.findViewById(R.id.nick)
     }
 }
