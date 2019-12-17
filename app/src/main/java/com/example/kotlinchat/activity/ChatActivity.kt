@@ -1,6 +1,9 @@
 package com.example.kotlinchat.activity
 
+import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
+import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -16,6 +19,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinchat.R
 import com.example.kotlinchat.adapter.MessageAdapter
 import com.example.kotlinchat.data.chat.Chat
+import com.example.kotlinchat.network.NetworkTask
+import com.example.kotlinchat.network.RequestHttpURLConnection
+import org.json.simple.JSONObject
+import org.json.simple.parser.JSONParser
 
 class ChatActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -31,7 +38,7 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var mapActionbar: Toolbar
 
     private val welcomePath: String = "http://221.154.145.243:5000/"
-    private val messagePath: String = "http://221.154.145.243:5000/chatbot"
+    private val messagePath: String = "http://221.154.145.243:5000/msg"
     private val messageImgPath: String = "http://221.154.145.243:5000/img"
     private lateinit var messageAdapter: MessageAdapter
     private lateinit var mchat:ArrayList<Chat>
@@ -96,11 +103,23 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
         val msg:String = editText_chat.text.toString()
         Log.d("MSG", msg)
         if (msg != null){
-            val chat:Chat = Chat(MSG_RIGHT, nick, "Neck", msg)
+
+            // 내가 입력한 메세지 전송
+            val chat:Chat = Chat(MSG_RIGHT, nick, "Trigobot", msg)
 
             messageAdapter.addChat(chat)
             recyclerView.smoothScrollToPosition(messageAdapter.itemCount - 1)
+
+            val contentValues: ContentValues = ContentValues()
+            contentValues.put("name", nick)
+            contentValues.put("msg", msg);
+//            contentValues.put("cookie", cookie);
+
             editText_chat.setText("")
+
+            val networkTask: NetworkTask = NetworkTask(messageAdapter, recyclerView, messagePath, contentValues)
+            networkTask.execute()
         }
     }
+
 }
