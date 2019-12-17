@@ -1,5 +1,6 @@
 package com.example.kotlinchat.activity
 
+import android.Manifest
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
@@ -14,6 +15,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.RelativeLayout
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinchat.R
@@ -38,7 +40,7 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var mapActionbar: Toolbar
 
     private val welcomePath: String = "http://221.154.145.243:5000/"
-    private val messagePath: String = "http://221.154.145.243:5000/msg"
+    private val messagePath: String = "http://192.168.0.14:5000/msg"
     private val messageImgPath: String = "http://221.154.145.243:5000/img"
     private lateinit var messageAdapter: MessageAdapter
     private lateinit var mchat:ArrayList<Chat>
@@ -62,8 +64,8 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
 //        actionBar.setDisplayHomeAsUpEnabled(true);
 //
 //        // Manifest에 설정할 권한 부여
-//        ActivityCompat.requestPermissions(ChatActivity.this, new String[]{Manifest.permission.INTERNET}, 2);
-//        ActivityCompat.requestPermissions(ChatActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+//        ActivityCompat.requestPermissions(ChatActivity.this, String[]{Manifest.permission.INTERNET}, 2);
+//        ActivityCompat.requestPermissions(ChatActivity.this, new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
 
         // 문장 입력 바
         editText_chat = findViewById(R.id.editText_chat)

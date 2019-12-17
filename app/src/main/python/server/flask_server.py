@@ -93,10 +93,10 @@ class SignupUser(Resource):
 
 #             return msg
 
-api.add_resource(HelloUser, '/')
+# api.add_resource(HelloUser, '/')
 api.add_resource(PredictSeq2SeqSentence, '/msg')
-api.add_resource(MessageWithMap, '/msgmap')
-api.add_resource(ImageMessage, '/msgimage')
+# api.add_resource(MessageWithMap, '/msgmap')
+# api.add_resource(ImageMessage, '/msgimage')
 api.add_resource(LoginUser, '/login')
 api.add_resource(SignupUser, '/signup')
 

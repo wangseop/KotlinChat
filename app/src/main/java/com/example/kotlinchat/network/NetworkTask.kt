@@ -2,6 +2,7 @@ package com.example.kotlinchat.network
 import android.content.ContentValues
 import android.content.Context
 import android.os.AsyncTask
+import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinchat.adapter.MessageAdapter
 import com.example.kotlinchat.data.chat.Chat
@@ -26,6 +27,7 @@ class NetworkTask(val msgAdapter: MessageAdapter, val recyclerView: RecyclerView
         super.onPostExecute(result)
 
         try{
+            Log.d("JSONRESULT", result)
             val jsonParser:JSONParser = JSONParser()
             val jsonObject: JSONObject = jsonParser.parse(result) as JSONObject
 

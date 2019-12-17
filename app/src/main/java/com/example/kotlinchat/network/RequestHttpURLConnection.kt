@@ -28,7 +28,8 @@ class RequestHttpURLConnection {
             var value:String
 
             sbParams.append("{")
-            for (parameter:Map.Entry<String, Object> in params.valueSet() as MutableMap<String, Object>){
+
+            for (parameter in params.valueSet().iterator()){
                 key = parameter.key
                 value = parameter.value.toString()
 
