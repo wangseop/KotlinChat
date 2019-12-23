@@ -15,7 +15,7 @@ api = Api(app)
 class PredictSeq2SeqSentence(Resource):
 
     def post(self):
-
+        data = request.get_json()
         message = "안녕하세요"
         ## 전달할 메세지 구성
         msg = [['message', message], ['sender', 'Trigobot'], ['receiver', data['name']]]

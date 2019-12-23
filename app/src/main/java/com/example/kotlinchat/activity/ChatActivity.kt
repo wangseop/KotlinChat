@@ -39,9 +39,9 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var selectImgLayout: RelativeLayout
     private lateinit var mapActionbar: Toolbar
 
-    private val welcomePath: String = "http://221.154.145.243:5000/"
-    private val messagePath: String = "http://3.16.169.18/msg"
-    private val messageImgPath: String = "http://221.154.145.243:5000/img"
+    private val welcomePath: String = "http://3.16.169.18:5000/"
+    private val messagePath: String = "http://3.16.169.18:5000/msg"
+    private val messageImgPath: String = "http://3.16.169.18:5000/img"
     private lateinit var messageAdapter: MessageAdapter
     private lateinit var mchat:ArrayList<Chat>
     private lateinit var recyclerView:RecyclerView
@@ -52,7 +52,7 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_chat)
 
         var intent: Intent = this.intent
-//        nick = intent.getStringExtra("nick")
+        nick = intent.getStringExtra("nick")
 
 //        // 액션바
 //        mapActionbar = (Toolbar)findViewById(R.id.chat_toolbar);

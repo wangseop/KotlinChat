@@ -7,7 +7,8 @@
     android:paddingRight="10dp"
     android:paddingTop="30dp"
     android:paddingBottom="30dp"
-    android:background="@drawable/splash_img2">
+    android:background="@color/colorPrimary">
+<!--    android:background="@drawable/splash_img2">-->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -17,12 +18,15 @@
             android:orientation="vertical"
             android:padding="20dp">
             <!-- 로고 -->
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_gravity="center_horizontal"
-                android:padding="16dp"
-                android:src="@drawable/logo8"/>
+            <View
+                android:layout_height="50dp"
+                android:layout_width="match_parent"></View>
+<!--            <ImageView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="100dp"-->
+<!--                android:layout_gravity="center_horizontal"-->
+<!--                android:padding="16dp"-->
+<!--                android:src="@drawable/logo8"/>-->
 
             <LinearLayout
                 android:id="@+id/login_thumbnail"
