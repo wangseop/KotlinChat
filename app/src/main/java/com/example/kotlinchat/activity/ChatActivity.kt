@@ -40,7 +40,7 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var mapActionbar: Toolbar
 
     private val welcomePath: String = "http://221.154.145.243:5000/"
-    private val messagePath: String = "http://192.168.0.14:5000/msg"
+    private val messagePath: String = "http://3.16.169.18/msg"
     private val messageImgPath: String = "http://221.154.145.243:5000/img"
     private lateinit var messageAdapter: MessageAdapter
     private lateinit var mchat:ArrayList<Chat>

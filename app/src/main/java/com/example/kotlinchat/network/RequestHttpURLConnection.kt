@@ -73,9 +73,10 @@ class RequestHttpURLConnection {
                 sbParams.toString() // sbParams에 정리한 파라미터들을 스트링으로 저장. 예)id=id1&pw=123;
             // [2-3]. 연결 요청 확인.
             // 실패 시 null을 리턴하고 메서드를 종료.
-            if (urlConn.responseCode != HttpURLConnection.HTTP_OK) //                Log.d("Connection", "Failed...");
+            if (urlConn.responseCode != HttpURLConnection.HTTP_OK) { //                Log.d("Connection", "Failed...");
                 urlConn.disconnect()
                 return ""
+            }
             // [2-4]. 읽어온 결과물 리턴.
             // 요청한 URL의 출력물을 BufferReader로 받는다.
             val reader = BufferedReader(
