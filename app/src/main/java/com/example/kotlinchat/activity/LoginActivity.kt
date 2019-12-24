@@ -97,6 +97,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     companion object {
         //    private ActionBar actionbar;
-        private const val loginUrl = "http://3.16.169.18:5000/login"
+        private const val loginUrl = "http://3.15.44.44:5000/login"
     }
 }
