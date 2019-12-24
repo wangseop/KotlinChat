@@ -7,6 +7,7 @@ import android.os.AsyncTask
 import android.util.Log
 import android.widget.Toast
 import com.example.kotlinchat.activity.ChatActivity
+import com.example.kotlinchat.activity.LatestMessagesActivity
 import com.example.kotlinchat.data.user.LoginData
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
@@ -36,7 +37,7 @@ class NetworkLoginTask(
             val jsonObject: JSONObject = jsonParser.parse(s) as JSONObject
 
             if (jsonObject["state"] as String == "OK") {
-                val intent = Intent(context, ChatActivity::class.java)
+                val intent = Intent(context, LatestMessagesActivity::class.java)
 //                intent.putExtra("nick", pref.getString("id",null))
                 intent.putExtra("nick", jsonObject["nick"] as String)
                 // 쿠키값 전달

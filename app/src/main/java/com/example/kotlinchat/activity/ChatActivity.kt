@@ -114,7 +114,7 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
 
             val contentValues: ContentValues = ContentValues()
             contentValues.put("name", nick)
-            contentValues.put("msg", msg);
+            contentValues.put("msg", msg)
 //            contentValues.put("cookie", cookie);
 
             editText_chat.setText("")

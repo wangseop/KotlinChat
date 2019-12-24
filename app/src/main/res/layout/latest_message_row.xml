@@ -6,7 +6,7 @@
     android:layout_height="120dp">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/chat_profile"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginStart="24dp"
@@ -16,18 +16,18 @@
         app:srcCompat="@drawable/round_tan" />
 
     <TextView
-        android:id="@+id/textview"
+        android:id="@+id/chat_profile_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="Username"
         app:layout_constraintVertical_chainStyle="packed"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintBottom_toTopOf="@+id/chat_latest_message"
+        app:layout_constraintStart_toEndOf="@+id/chat_profile"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/chat_latest_message"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -37,6 +37,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/textview" />
+        app:layout_constraintStart_toEndOf="@+id/chat_profile"
+        app:layout_constraintTop_toBottomOf="@+id/chat_profile_name" />
 </androidx.constraintlayout.widget.ConstraintLayout>
