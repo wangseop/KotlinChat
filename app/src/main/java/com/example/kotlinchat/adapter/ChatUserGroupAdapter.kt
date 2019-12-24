@@ -33,6 +33,14 @@ class ChatUserGroupAdapter(val mUser : ArrayList<ChatUser>, val mContext: Contex
             }
             1 -> {
                 val view = LayoutInflater.from(mContext).inflate(R.layout.latest_message_row, parent, false)
+                view.setOnClickListener{
+                    val intent = Intent(mContext, ChatActivity::class.java)
+//                intent.putExtra("nick", pref.getString("id",null))
+                    intent.putExtra("nick", nickname)
+                    // 쿠키값 전달
+//                intent.putExtra("cookie", jsonMap["cookie"])
+                    mContext.startActivity(intent)
+                }
                 viewHolder =  ChatUserViewHolder(view)
             }
         }
@@ -50,12 +58,7 @@ class ChatUserGroupAdapter(val mUser : ArrayList<ChatUser>, val mContext: Contex
             bindHolder.profile_image.setImageResource(R.drawable.round_tan)
             bindHolder.profile_name.setText(user.username)
             bindHolder.latest_msg.setText(user.latestMessage)
-            val intent = Intent(mContext, ChatActivity::class.java)
-//                intent.putExtra("nick", pref.getString("id",null))
-            intent.putExtra("nick", nickname)
-            // 쿠키값 전달
-//                intent.putExtra("cookie", jsonMap["cookie"])
-            mContext.startActivity(intent)
+
         }else{
             val bindHolder = holder as ChatUserPlusViewHolder
             bindHolder.plus_image.setOnClickListener{

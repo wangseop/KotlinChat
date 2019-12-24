@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/chatBackground"
     tools:context=".activity.LatestMessagesActivity">
 
     <androidx.recyclerview.widget.RecyclerView
