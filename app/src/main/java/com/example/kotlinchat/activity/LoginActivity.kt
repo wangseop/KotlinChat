@@ -1,8 +1,10 @@
 package com.example.kotlinchat.activity
 
+import android.Manifest
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,6 +13,8 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.kotlinchat.R
 import com.example.kotlinchat.data.user.LoginData
 import com.example.kotlinchat.network.NetworkLoginTask
@@ -29,6 +33,18 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         // SharedPreference 생성
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+
+            } else {
+                ActivityCompat.requestPermissions(this,
+                    Array(10){ Manifest.permission.READ_EXTERNAL_STORAGE},
+                    1)
+            }
+        }
+
+
         //        // 액션바 비활성화
 //        actionbar = getSupportActionBar();
 //        actionbar.hide();

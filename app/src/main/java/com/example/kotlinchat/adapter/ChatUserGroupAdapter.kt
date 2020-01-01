@@ -1,10 +1,15 @@
 package com.example.kotlinchat.adapter
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinchat.R
 import com.example.kotlinchat.activity.ChatActivity
@@ -13,6 +18,9 @@ import com.example.kotlinchat.data.group.ChatUser
 import com.example.kotlinchat.viewholder.ChatUserPlusViewHolder
 import com.example.kotlinchat.viewholder.ChatUserViewHolder
 import com.example.kotlinchat.viewholder.MessageViewHolder
+
+import java.io.*
+
 
 class ChatUserGroupAdapter(val mUser : ArrayList<ChatUser>, val mContext: Context, val nickname: String) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -64,7 +72,27 @@ class ChatUserGroupAdapter(val mUser : ArrayList<ChatUser>, val mContext: Contex
         }else{
             val bindHolder = holder as ChatUserPlusViewHolder
             bindHolder.plus_image.setOnClickListener{
-                addChatUser(ChatUser(true, "", "nick", ""))
+//                addChatUser(ChatUser(true, "", "nick", ""))
+                // 외부 저장소 경로 보는 방법
+                // shift 2번 -> Device File Explorer 에서 sdcard/KaKaoTalk/Chats/ 참조
+                // 혹은 mnt/sdcard/KaKaoTalk/Chats/
+//                val folder:File = File(Environment.getExternalStorageDirectory().absolutePath +"/KakaoTalk/Chats/KakaoTalk_Chats_2020-01-02_03.28.38")
+                val folder:File = File("mnt/sdcard" +"/KakaoTalk/Chats/KakaoTalk_Chats_2020-01-02_03.28.38")
+                // folder 이름 내 채팅 목록 폴더명
+                Log.d("File List", folder.list()[0])
+
+                try {
+                    val buf = BufferedReader(FileReader(folder.absolutePath + "/" + folder.list()[0]))
+                    val line:String = buf.readLine()
+                    Log.d("KakaoTalk", line)
+                    buf.close()
+                } catch (e: FileNotFoundException) {
+                    e.printStackTrace()
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+
+
             }
         }
     }
