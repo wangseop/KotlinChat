@@ -20,6 +20,8 @@ class ChatUserGroupAdapter(val mUser : ArrayList<ChatUser>, val mContext: Contex
         mUser.add(ChatUser(false, "", "", ""))
         Log.d("Message Adapter AddChat", ""+(mUser.size-1))
         notifyItemInserted(mUser.size-1)
+
+        addChatUser(ChatUser(true, "", "nick", ""))
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         lateinit var viewHolder : RecyclerView.ViewHolder
