@@ -8,12 +8,12 @@
     android:weightSum="1"
     android:background="@color/chatBackground"
     tools:context=".activity.ChatActivity">
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/chat_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        android:theme="@style/AppTheme"/>
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:id="@+id/chat_toolbar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="?attr/actionBarSize"-->
+<!--        android:background="@color/colorPrimary"-->
+<!--        android:theme="@style/AppTheme"/>-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/my_recycler_view"
