@@ -3,16 +3,19 @@ package com.example.kotlinchat.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
+import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinchat.R
 import com.example.kotlinchat.adapter.ChatSelectGroupAdapter
 import com.example.kotlinchat.adapter.ChatUserGroupAdapter
 import com.example.kotlinchat.data.chatbot.ChatbotSource
 import com.example.kotlinchat.data.group.ChatUser
+import java.io.*
 
 class ChatSelectActivity : AppCompatActivity() {
 
-    private lateinit var chatUserGroupAdapter: ChatSelectGroupAdapter
+    private lateinit var chatSelectGroupAdapter: ChatSelectGroupAdapter
     private lateinit var mSelectChat:ArrayList<ChatbotSource>
     private lateinit var recyclerView: RecyclerView
     private lateinit var nickname: String
@@ -44,9 +47,47 @@ class ChatSelectActivity : AppCompatActivity() {
         mSelectChat = ArrayList<ChatbotSource>()
 
         // MessageAdapter 설정
-        chatUserGroupAdapter = ChatSelectGroupAdapter(mSelectChat, this)
+        chatSelectGroupAdapter = ChatSelectGroupAdapter(mSelectChat, this)
 
         // RecyclerView와 Adapter 연결
-        recyclerView.adapter = chatUserGroupAdapter
+        recyclerView.adapter = chatSelectGroupAdapter
+
+        // 데이터 추가
+        // 외부 저장소 경로 보는 방법
+        // shift 2번 -> Device File Explorer 에서 sdcard/KaKaoTalk/Chats/ 참조
+        // 혹은 mnt/sdcard/KaKaoTalk/Chats/
+//        val folder: File = File(Environment.getExternalStorageDirectory().absolutePath +"/KakaoTalk/Chats/KakaoTalk_Chats_2020-01-02_03.28.38")
+
+        val folderPath = "mnt/sdcard/KakaoTalk/Chats"
+        val folder:File = File(folderPath)
+
+        for(file in folder.list()){
+            try {
+                val buf = BufferedReader(FileReader(folderPath + "/" +file + "/KakaoTalkChats.txt"))
+                val title:String = buf.readLine()
+                Log.d("KakaoTalk", title)
+                buf.close()
+
+                chatSelectGroupAdapter.addChatbotSource(ChatbotSource(title, file))
+
+            } catch (e: FileNotFoundException) {
+                e.printStackTrace()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+//                // folder 이름 내 채팅 목록 폴더명
+//                Log.d("File List", folder.list()[0])
+//
+//                try {
+//                    val buf = BufferedReader(FileReader(folder.absolutePath + "/" + folder.list()[0]))
+//                    val line:String = buf.readLine()
+//                    Log.d("KakaoTalk", line)
+//                    buf.close()
+//                } catch (e: FileNotFoundException) {
+//                    e.printStackTrace()
+//                } catch (e: IOException) {
+//                    e.printStackTrace()
+//                }
     }
 }

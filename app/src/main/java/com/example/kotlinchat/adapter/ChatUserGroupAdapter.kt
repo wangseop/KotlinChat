@@ -85,25 +85,7 @@ class ChatUserGroupAdapter(val mUser : ArrayList<ChatUser>, val mContext: Contex
                 val latestMessagesActivity:LatestMessagesActivity = mContext as LatestMessagesActivity
                 latestMessagesActivity.startActivityForResult(intent, chatSelectResult)
 
-//                addChatUser(ChatUser(true, "", "nick", ""))
-                // 외부 저장소 경로 보는 방법
-                // shift 2번 -> Device File Explorer 에서 sdcard/KaKaoTalk/Chats/ 참조
-                // 혹은 mnt/sdcard/KaKaoTalk/Chats/
-//                val folder:File = File(Environment.getExternalStorageDirectory().absolutePath +"/KakaoTalk/Chats/KakaoTalk_Chats_2020-01-02_03.28.38")
-//                val folder:File = File("mnt/sdcard" +"/KakaoTalk/Chats/KakaoTalk_Chats_2020-01-02_03.28.38")
-//                // folder 이름 내 채팅 목록 폴더명
-//                Log.d("File List", folder.list()[0])
-//
-//                try {
-//                    val buf = BufferedReader(FileReader(folder.absolutePath + "/" + folder.list()[0]))
-//                    val line:String = buf.readLine()
-//                    Log.d("KakaoTalk", line)
-//                    buf.close()
-//                } catch (e: FileNotFoundException) {
-//                    e.printStackTrace()
-//                } catch (e: IOException) {
-//                    e.printStackTrace()
-//                }
+
 
 
             }
