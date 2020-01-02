@@ -53,7 +53,6 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
 
         var intent: Intent = this.intent
         nick = intent.getStringExtra("nick")
-
 //        // 액션바
 //        mapActionbar = (Toolbar)findViewById(R.id.chat_toolbar);
 //
