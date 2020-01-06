@@ -8,9 +8,7 @@ import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinchat.R
 import com.example.kotlinchat.adapter.ChatSelectGroupAdapter
-import com.example.kotlinchat.adapter.ChatUserGroupAdapter
 import com.example.kotlinchat.data.chatbot.ChatbotSource
-import com.example.kotlinchat.data.group.ChatUser
 import java.io.*
 
 class ChatSelectActivity : AppCompatActivity() {
@@ -71,8 +69,6 @@ class ChatSelectActivity : AppCompatActivity() {
 
                 chatSelectGroupAdapter.addChatbotSource(ChatbotSource(title, realPath))
 
-            } catch (e: FileNotFoundException) {
-                e.printStackTrace()
             } catch (e: IOException) {
                 e.printStackTrace()
             }
