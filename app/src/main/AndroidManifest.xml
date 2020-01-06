@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.ChatSelectActivity"></activity>
+        <activity android:name=".activity.ChatDetailActivity"></activity>
+        <activity android:name=".activity.ChatSelectActivity" />
         <activity android:name=".activity.LatestMessagesActivity" />
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.LoginActivity">
@@ -22,7 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ChatActivity" />
+        <activity android:name=".activity.ChatBotActivity" />
     </application>
 
 </manifest>

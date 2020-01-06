@@ -1,20 +1,13 @@
 package com.example.kotlinchat.adapter
 
 import android.content.Context
-import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinchat.R
-import com.example.kotlinchat.activity.ChatActivity
-import com.example.kotlinchat.activity.ChatSelectActivity
-import com.example.kotlinchat.activity.LatestMessagesActivity
 import com.example.kotlinchat.data.chatbot.ChatbotSource
-import com.example.kotlinchat.data.group.ChatUser
 import com.example.kotlinchat.viewholder.ChatSelectViewHolder
-import com.example.kotlinchat.viewholder.ChatUserPlusViewHolder
-import com.example.kotlinchat.viewholder.ChatUserViewHolder
 
 class ChatSelectGroupAdapter(val mSelectChat : ArrayList<ChatbotSource>, val mContext: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 

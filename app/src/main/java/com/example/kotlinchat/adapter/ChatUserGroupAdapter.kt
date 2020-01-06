@@ -1,28 +1,18 @@
 package com.example.kotlinchat.adapter
 
-import android.Manifest
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinchat.R
-import com.example.kotlinchat.activity.ChatActivity
+import com.example.kotlinchat.activity.ChatBotActivity
 import com.example.kotlinchat.activity.ChatSelectActivity
 import com.example.kotlinchat.activity.LatestMessagesActivity
-import com.example.kotlinchat.data.chat.Chat
 import com.example.kotlinchat.data.group.ChatUser
 import com.example.kotlinchat.viewholder.ChatUserPlusViewHolder
 import com.example.kotlinchat.viewholder.ChatUserViewHolder
-import com.example.kotlinchat.viewholder.MessageViewHolder
-
-import java.io.*
 
 
 class ChatUserGroupAdapter(val mUser : ArrayList<ChatUser>, val mContext: Context, val nickname: String) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -48,7 +38,7 @@ class ChatUserGroupAdapter(val mUser : ArrayList<ChatUser>, val mContext: Contex
             1 -> {
                 val view = LayoutInflater.from(mContext).inflate(R.layout.latest_message_row, parent, false)
                 view.setOnClickListener{
-                    val intent = Intent(mContext, ChatActivity::class.java)
+                    val intent = Intent(mContext, ChatBotActivity::class.java)
 
 //                intent.putExtra("nick", pref.getString("id",null))
                     intent.putExtra("nick", nickname)

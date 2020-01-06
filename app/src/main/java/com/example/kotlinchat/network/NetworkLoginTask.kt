@@ -4,15 +4,12 @@ import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
-import android.util.Log
 import android.widget.Toast
-import com.example.kotlinchat.activity.ChatActivity
 import com.example.kotlinchat.activity.LatestMessagesActivity
 import com.example.kotlinchat.data.user.LoginData
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 import org.json.simple.parser.ParseException
-import java.util.*
 
 class NetworkLoginTask(
     val context: Context, val url: String, val values: ContentValues, val loginData: LoginData) : AsyncTask<Void, Void, String>(){

@@ -1,10 +1,7 @@
 package com.example.kotlinchat.activity
 
-import android.Manifest
 import android.content.ContentValues
-import android.content.Context
 import android.content.Intent
-import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -15,18 +12,14 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.RelativeLayout
 import androidx.appcompat.widget.Toolbar
-import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinchat.R
 import com.example.kotlinchat.adapter.MessageAdapter
 import com.example.kotlinchat.data.chat.Chat
 import com.example.kotlinchat.network.NetworkTask
-import com.example.kotlinchat.network.RequestHttpURLConnection
-import org.json.simple.JSONObject
-import org.json.simple.parser.JSONParser
 
-class ChatActivity : AppCompatActivity(), View.OnClickListener {
+class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
 
     private val MSG_LEFT:Int = 1
     private val MSG_RIGHT:Int = 2
@@ -49,7 +42,7 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_chat)
+        setContentView(R.layout.activity_chat_bot)
 
         var intent: Intent = this.intent
         nick = intent.getStringExtra("nick")

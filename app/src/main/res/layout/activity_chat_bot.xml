@@ -7,7 +7,7 @@
     android:orientation='vertical'
     android:weightSum="1"
     android:background="@color/chatBackground"
-    tools:context=".activity.ChatActivity">
+    tools:context=".activity.ChatBotActivity">
 <!--    <androidx.appcompat.widget.Toolbar-->
 <!--        android:id="@+id/chat_toolbar"-->
 <!--        android:layout_width="match_parent"-->
