@@ -63,12 +63,13 @@ class ChatSelectActivity : AppCompatActivity() {
 
         for(file in folder.list()){
             try {
-                val buf = BufferedReader(FileReader(folderPath + "/" +file + "/KakaoTalkChats.txt"))
+                val realPath:String = folderPath + "/" +file + "/KakaoTalkChats.txt"
+                val buf = BufferedReader(FileReader(realPath))
                 val title:String = buf.readLine()
                 Log.d("KakaoTalk", title)
                 buf.close()
 
-                chatSelectGroupAdapter.addChatbotSource(ChatbotSource(title, file))
+                chatSelectGroupAdapter.addChatbotSource(ChatbotSource(title, realPath))
 
             } catch (e: FileNotFoundException) {
                 e.printStackTrace()

@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinchat.R
 import com.example.kotlinchat.adapter.MessageAdapter
-import com.example.kotlinchat.data.chat.Chat
+import com.example.kotlinchat.data.message.ChatMessage
 import com.example.kotlinchat.network.NetworkTask
 
 class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
@@ -36,7 +36,7 @@ class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
     private val messagePath: String = "http://3.15.44.44:5000/msg"
     private val messageImgPath: String = "http://3.15.44.44:5000/img"
     private lateinit var messageAdapter: MessageAdapter
-    private lateinit var mchat:ArrayList<Chat>
+    private lateinit var mchat:ArrayList<ChatMessage>
     private lateinit var recyclerView:RecyclerView
 
 
@@ -74,7 +74,7 @@ class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
         recyclerView.layoutManager = linearLayoutManager
 
         // 대화리스트 초기화
-        mchat = ArrayList<Chat>()
+        mchat = ArrayList<ChatMessage>()
 
         // MessageAdapter 설정
         messageAdapter = MessageAdapter(mchat, this)
@@ -99,9 +99,9 @@ class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
         if (msg != null){
 
             // 내가 입력한 메세지 전송
-            val chat:Chat = Chat(MSG_RIGHT, nick, "Trigobot", msg)
+            val chatMessage:ChatMessage = ChatMessage(MSG_RIGHT, nick, "Trigobot", msg)
 
-            messageAdapter.addChat(chat)
+            messageAdapter.addChat(chatMessage)
             recyclerView.smoothScrollToPosition(messageAdapter.itemCount - 1)
 
             val contentValues: ContentValues = ContentValues()

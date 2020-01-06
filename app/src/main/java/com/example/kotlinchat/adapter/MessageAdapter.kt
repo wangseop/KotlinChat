@@ -1,17 +1,15 @@
 package com.example.kotlinchat.adapter
 
 import android.content.Context
-import android.os.Message
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinchat.R
-import com.example.kotlinchat.data.chat.Chat
+import com.example.kotlinchat.data.message.ChatMessage
 import com.example.kotlinchat.viewholder.MessageViewHolder
 
-class MessageAdapter(val mChat : ArrayList<Chat>, val mContext: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class MessageAdapter(val mChatMessage : ArrayList<ChatMessage>, val mContext: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     private val MSG_LEFT:Int = 1
     private val MSG_RIGHT:Int = 2
@@ -32,7 +30,7 @@ class MessageAdapter(val mChat : ArrayList<Chat>, val mContext: Context) : Recyc
 
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val chat = mChat[position]
+        val chat = mChatMessage[position]
 
         val type:Int = holder.itemViewType
         var bindHolder:MessageViewHolder
@@ -50,17 +48,17 @@ class MessageAdapter(val mChat : ArrayList<Chat>, val mContext: Context) : Recyc
     }
 
     override fun getItemCount(): Int {
-        return mChat.size
+        return mChatMessage.size
     }
 
     override fun getItemViewType(position: Int): Int {
-        return mChat[position].msgType
+        return mChatMessage[position].msgType
     }
 
-    fun addChat(chat:Chat){
-        mChat.add(chat)
-        Log.d("Message Adapter AddChat", ""+(mChat.size-1))
-        notifyItemInserted(mChat.size-1)
+    fun addChat(chatMessage:ChatMessage){
+        mChatMessage.add(chatMessage)
+        Log.d("Message Adapter AddChat", ""+(mChatMessage.size-1))
+        notifyItemInserted(mChatMessage.size-1)
 
     }
 }

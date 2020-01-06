@@ -1,11 +1,13 @@
 package com.example.kotlinchat.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinchat.R
+import com.example.kotlinchat.activity.ChatDetailActivity
 import com.example.kotlinchat.data.chatbot.ChatbotSource
 import com.example.kotlinchat.viewholder.ChatSelectViewHolder
 
@@ -15,21 +17,23 @@ class ChatSelectGroupAdapter(val mSelectChat : ArrayList<ChatbotSource>, val mCo
         lateinit var viewHolder : RecyclerView.ViewHolder
 
         val view = LayoutInflater.from(mContext).inflate(R.layout.chat_select_row, parent, false)
-        view.setOnClickListener {       // 클릭시 텍스트 창 뜨게
-
-        }
         viewHolder = ChatSelectViewHolder(view)
         return viewHolder
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val chatSrc = mSelectChat[position]
-
         val type:Int = holder.itemViewType
         if (type == 1){
             val bindHolder = holder as ChatSelectViewHolder
             bindHolder.chatSelectTitle.setText(chatSrc.title)
             bindHolder.chatSelectSrc.setText(chatSrc.directorySrc)
+            bindHolder.itemView.setOnClickListener{       // 클릭시 텍스트 창 뜨게
+                val intent: Intent = Intent(mContext, ChatDetailActivity::class.java)
+                intent.putExtra("path", chatSrc.directorySrc)
+
+                mContext.startActivity(intent)
+            }
         }
     }
 

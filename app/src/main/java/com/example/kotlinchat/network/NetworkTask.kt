@@ -1,15 +1,13 @@
 package com.example.kotlinchat.network
 import android.content.ContentValues
-import android.content.Context
 import android.os.AsyncTask
 import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinchat.adapter.MessageAdapter
-import com.example.kotlinchat.data.chat.Chat
+import com.example.kotlinchat.data.message.ChatMessage
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 import org.json.simple.parser.ParseException
-import java.lang.NullPointerException
 
 class NetworkTask(val msgAdapter: MessageAdapter, val recyclerView: RecyclerView, val url: String, val values: ContentValues) : AsyncTask<Void, Void, String>(){
 
@@ -31,10 +29,10 @@ class NetworkTask(val msgAdapter: MessageAdapter, val recyclerView: RecyclerView
             val jsonParser:JSONParser = JSONParser()
             val jsonObject: JSONObject = jsonParser.parse(result) as JSONObject
 
-            val chat: Chat = Chat(MSG_LEFT, jsonObject.get("sender") as String,
+            val chatMessage: ChatMessage = ChatMessage(MSG_LEFT, jsonObject.get("sender") as String,
                 jsonObject.get("receiver") as String, jsonObject.get("message") as String)
 
-            msgAdapter.addChat(chat)
+            msgAdapter.addChat(chatMessage)
             recyclerView.smoothScrollToPosition(msgAdapter.itemCount - 1)
         }catch(e : ParseException) {
             e.printStackTrace()
