@@ -68,8 +68,11 @@ class ChatDetailActivity : AppCompatActivity() {
             buf = BufferedReader(FileReader(filePath))
             val texts:List<String> = buf.readLines()
             val questioner = "회원님 : "
-            val respondent:String = texts[0].substringBefore("님과") + ": "
-            Log.d("respondent before", texts[0].substringBefore("님과"))
+            val respondent:String = texts[0].substringBefore("님과").substring(1) + ": "
+            Log.d("respondent size", ""+respondent.length)
+
+            Log.d("respondent before", texts[0].substringBefore("님과").substring(1))
+            Log.d("respondent before", texts[0].substringBefore("님과").substring(0, texts[0].substringBefore("님과").length-1))
             Log.d("questioner", questioner)
             Log.d("respondent", respondent)
             for(text in texts.subList(0, texts.size)){
