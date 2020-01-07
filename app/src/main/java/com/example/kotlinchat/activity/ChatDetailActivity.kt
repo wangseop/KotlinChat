@@ -11,6 +11,7 @@ import com.example.kotlinchat.adapter.ChatSelectGroupAdapter
 import com.example.kotlinchat.adapter.PartialChatGroupAdapter
 import com.example.kotlinchat.data.chatbot.ChatbotSource
 import com.example.kotlinchat.data.chatbot.PartialChatBotSource
+import org.w3c.dom.Text
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileReader
@@ -62,21 +63,25 @@ class ChatDetailActivity : AppCompatActivity() {
     }
     private fun textDataInit(){
         lateinit var buf:BufferedReader
-        var isTellQ:Boolean = false
+        var isTellQ = false
         try {
             buf = BufferedReader(FileReader(filePath))
             val texts:List<String> = buf.readLines()
-            for(text in texts){
-                isTellQ = !isTellQ
+            val questioner = "회원님 : "
+            val respondent:String = texts[0].substringBefore("님과") + ": "
+            Log.d("respondent before", texts[0].substringBefore("님과"))
+            Log.d("questioner", questioner)
+            Log.d("respondent", respondent)
+            for(text in texts.subList(0, texts.size)){
+                if(text.isBlank()) continue     // 공백문 제거
+                if(text.contains(questioner)) isTellQ = true
+                if(text.contains(respondent)) isTellQ = false
+
+                Log.d("contains", ""+ text.contains(questioner) + " / " + text.contains(respondent) + " / " + isTellQ)
+
+//                isTellQ = !isTellQ
                 partialChatGroupAdapter.addPartialChatSource(PartialChatBotSource(isTellQ, text))
             }
-//            while(buf.readLine() != null){
-//                val text:String = buf.readLine()
-//                isTellQ = !isTellQ
-//                Log.d("KakaoTalk", text)
-//                partialChatGroupAdapter.addPartialChatSource(PartialChatBotSource(isTellQ, text))
-//
-//            }
 
 
         } catch (e: IOException) {

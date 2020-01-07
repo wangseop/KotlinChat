@@ -28,11 +28,11 @@ class PartialChatGroupAdapter(val mPartialChat : ArrayList<PartialChatBotSource>
         if (type == 1){
             val bindHolder = holder as ChatDetailViewHolder
             if(chatSrc.isQ)
-                bindHolder.chatDetailTitle.setText("Q")
+                bindHolder.chatDetailTitle.text = "Q"
             else
-                bindHolder.chatDetailTitle.setText("A")
+                bindHolder.chatDetailTitle.text = "A"
 
-            bindHolder.chatDetailText.setText(chatSrc.message)
+            bindHolder.chatDetailText.text = chatSrc.message
             bindHolder.itemView.setOnClickListener{       // 클릭시 텍스트 창 뜨게
 
             }
