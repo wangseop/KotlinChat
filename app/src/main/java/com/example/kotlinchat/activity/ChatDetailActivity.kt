@@ -69,18 +69,19 @@ class ChatDetailActivity : AppCompatActivity() {
             val texts:List<String> = buf.readLines()
             val questioner = "회원님 : "
             val respondent:String = texts[0].substringBefore("님과").substring(1) + ": "
-            Log.d("respondent size", ""+respondent.length)
 
+            Log.d("respondent size", ""+respondent.length)
             Log.d("respondent before", texts[0].substringBefore("님과").substring(1))
             Log.d("respondent before", texts[0].substringBefore("님과").substring(0, texts[0].substringBefore("님과").length-1))
             Log.d("questioner", questioner)
             Log.d("respondent", respondent)
-            for(text in texts.subList(0, texts.size)){
+
+            for(text in texts.subList(5, texts.size)){
                 if(text.isBlank()) continue     // 공백문 제거
                 if(text.contains(questioner)) isTellQ = true
                 if(text.contains(respondent)) isTellQ = false
 
-                Log.d("contains", ""+ text.contains(questioner) + " / " + text.contains(respondent) + " / " + isTellQ)
+                Log.d("text Size", ""+text.length)
 
 //                isTellQ = !isTellQ
                 partialChatGroupAdapter.addPartialChatSource(PartialChatBotSource(isTellQ, text))
