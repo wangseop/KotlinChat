@@ -70,6 +70,7 @@ class ChatUserGroupAdapter(val mUser : ArrayList<ChatUser>, val mContext: Contex
 
                 // 우선 startActivity로 처리
                 val intent:Intent = Intent(mContext, ChatSelectActivity::class.java)
+                intent.putExtra("nick", nickname)
 //                mContext.startActivity(intent)
 
                 val latestMessagesActivity:LatestMessagesActivity = mContext as LatestMessagesActivity

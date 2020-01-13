@@ -29,8 +29,8 @@ class ChatSelectActivity : AppCompatActivity() {
 
 
     private fun getIntentExtra(){
-//        var intent: Intent = this.intent
-//        nickname = intent.getStringExtra("nick")
+        var intent: Intent = this.intent
+        nickname = intent.getStringExtra("nick")
     }
 
     private fun createInit(){
@@ -45,7 +45,7 @@ class ChatSelectActivity : AppCompatActivity() {
         mSelectChat = ArrayList<ChatbotSource>()
 
         // MessageAdapter 설정
-        chatSelectGroupAdapter = ChatSelectGroupAdapter(mSelectChat, this)
+        chatSelectGroupAdapter = ChatSelectGroupAdapter(mSelectChat, this, nickname)
 
         // RecyclerView와 Adapter 연결
         recyclerView.adapter = chatSelectGroupAdapter

@@ -1,5 +1,6 @@
 package com.example.kotlinchat.activity
 
+import android.content.ContentValues
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,12 +10,16 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.text.isDigitsOnly
+import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinchat.R
 import com.example.kotlinchat.adapter.ChatSelectGroupAdapter
 import com.example.kotlinchat.adapter.PartialChatGroupAdapter
 import com.example.kotlinchat.data.chatbot.ChatbotSource
 import com.example.kotlinchat.data.chatbot.PartialChatBotSource
+import com.example.kotlinchat.data.user.LoginData
+import com.example.kotlinchat.network.CreateBotNetworkTask
+import com.example.kotlinchat.network.NetworkLoginTask
 import org.w3c.dom.Text
 import java.io.BufferedReader
 import java.io.File
@@ -45,7 +50,7 @@ class ChatDetailActivity : AppCompatActivity(), View.OnClickListener  {
     private fun getIntentExtra(){
         var intent: Intent = this.intent
         filePath = intent.getStringExtra("path")
-//        nickname = intent.getStringExtra("nick")
+        nickname = intent.getStringExtra("nick")
     }
 
 
@@ -152,7 +157,29 @@ class ChatDetailActivity : AppCompatActivity(), View.OnClickListener  {
         when(v.id){
             R.id.send_btn_chat_detail -> {
                 Log.d("Button : ", "Chat Detail Send")
+                val detailView:RecyclerView = this.findViewById<RecyclerView>(R.id.recyclerview_chat_detail)
+
+                var count = 0
+                var fullContexts = ""
+                while(count < detailView.childCount){
+                    val itemTitle:String = detailView[count].findViewById<TextView>(R.id.chat_detail_item_title).text.toString()
+                    val itemText:String = detailView[count++].findViewById<TextView>(R.id.chat_detail_item_text).text.toString()
+                    Log.d("Item Context -  ", "$itemTitle : $itemText")
+                    fullContexts += "$itemTitle : $itemText ///"
+                }
+
+                val values = ContentValues()
+//                val autoChecked = autoLogin.isChecked
+                values.put("contexts", fullContexts)
+                values.put("nick", nickname)
+                val task = CreateBotNetworkTask(sendInfoUrl, values)
+                task.execute()
+
             }
         }
+    }
+    companion object {
+        //    private ActionBar actionbar;
+        private const val sendInfoUrl = "http://3.15.44.44:5000/CreateBot"
     }
 }

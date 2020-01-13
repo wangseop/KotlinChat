@@ -11,7 +11,7 @@ import com.example.kotlinchat.activity.ChatDetailActivity
 import com.example.kotlinchat.data.chatbot.ChatbotSource
 import com.example.kotlinchat.viewholder.ChatSelectViewHolder
 
-class ChatSelectGroupAdapter(val mSelectChat : ArrayList<ChatbotSource>, val mContext: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class ChatSelectGroupAdapter(val mSelectChat : ArrayList<ChatbotSource>, val mContext: Context, val nickname: String) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         lateinit var viewHolder : RecyclerView.ViewHolder
@@ -31,6 +31,7 @@ class ChatSelectGroupAdapter(val mSelectChat : ArrayList<ChatbotSource>, val mCo
             bindHolder.itemView.setOnClickListener{       // 클릭시 텍스트 창 뜨게
                 val intent: Intent = Intent(mContext, ChatDetailActivity::class.java)
                 intent.putExtra("path", chatSrc.directorySrc)
+                intent.putExtra("nick", nickname)
 
                 mContext.startActivity(intent)
             }
