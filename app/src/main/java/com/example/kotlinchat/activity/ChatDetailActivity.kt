@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import androidx.core.text.isDigitsOnly
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinchat.R
 import com.example.kotlinchat.adapter.ChatSelectGroupAdapter
@@ -63,12 +64,13 @@ class ChatDetailActivity : AppCompatActivity() {
     }
     private fun textDataInit(){
         lateinit var buf:BufferedReader
-        var isTellQ = false
+        var tellQ = false
         try {
             buf = BufferedReader(FileReader(filePath))
             val texts:List<String> = buf.readLines()
             val questioner = "회원님 : "
             val respondent:String = texts[0].substringBefore("님과").substring(1) + ": "
+            var startIdx:Int = 0
 
             Log.d("respondent size", ""+respondent.length)
             Log.d("respondent before", texts[0].substringBefore("님과").substring(1))
@@ -76,16 +78,54 @@ class ChatDetailActivity : AppCompatActivity() {
             Log.d("questioner", questioner)
             Log.d("respondent", respondent)
 
-            for(text in texts.subList(5, texts.size)){
-                if(text.isBlank()) continue     // 공백문 제거
-                if(text.contains(questioner)) isTellQ = true
-                if(text.contains(respondent)) isTellQ = false
+            // Q먼저 나오게 필요없는 부분 제거
+            for(index in texts.indices){
+                if(texts[index].contains(questioner)){
+                    startIdx = index
+                    break
+                }
+            }
 
-                Log.d("text Size", ""+text.length)
+            // qa 처리부분
+            var textContext:String = ""
+            for(text in texts.subList(startIdx, texts.size)){
+                if(text.isBlank()) continue     // 공백문 제거
+
+                var cutText:String = ""
+                // 문자열 분류
+                if(text.contains(questioner)){   // Q 부분
+                    if (!tellQ){    // Q 첫 문장
+                        if(!textContext.isBlank()) partialChatGroupAdapter.addPartialChatSource(PartialChatBotSource(tellQ, textContext))
+                        tellQ = true
+                        textContext = ""
+
+                    }
+                    cutText = text.substringAfter(questioner, "")
+                }
+                else if(text.contains(respondent)){   // A 부분
+                    if(tellQ){  // A 첫 문장
+                        if(!textContext.isBlank()) partialChatGroupAdapter.addPartialChatSource(PartialChatBotSource(tellQ, textContext))
+                        tellQ = false
+                        textContext = ""
+                    }
+                    cutText = text.substringAfter(respondent, "")
+                }
+                else{       // 그 외 부분
+                    if((text.contains(" 오전 ") or text.contains(" 오후 ")) and text.substringBefore("년", "").isDigitsOnly())
+                        continue
+                    cutText = text
+                }
+
+                // 문장 접합 시 첫문장이 아닐경우 마침표 추가
+                if(!textContext.isBlank()) cutText = ". $cutText"
+                textContext += cutText
+
+                Log.d("text Size", ""+textContext.length)
 
 //                isTellQ = !isTellQ
-                partialChatGroupAdapter.addPartialChatSource(PartialChatBotSource(isTellQ, text))
             }
+            // 끝문장 처리
+            if(!tellQ and !textContext.isBlank()) partialChatGroupAdapter.addPartialChatSource(PartialChatBotSource(tellQ, textContext))
 
 
         } catch (e: IOException) {
