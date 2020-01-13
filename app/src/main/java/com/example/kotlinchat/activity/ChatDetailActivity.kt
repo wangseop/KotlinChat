@@ -4,7 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.text.isDigitsOnly
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinchat.R
@@ -18,13 +21,15 @@ import java.io.File
 import java.io.FileReader
 import java.io.IOException
 
-class ChatDetailActivity : AppCompatActivity() {
+class ChatDetailActivity : AppCompatActivity(), View.OnClickListener  {
 
     private lateinit var partialChatGroupAdapter: PartialChatGroupAdapter
     private lateinit var mPartialChat:ArrayList<PartialChatBotSource>
     private lateinit var recyclerView: RecyclerView
     private lateinit var nickname: String
     private lateinit var filePath:String
+
+    private lateinit var sendBtn: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_detail)
@@ -45,6 +50,13 @@ class ChatDetailActivity : AppCompatActivity() {
 
 
     private fun createInit(){
+
+        // view init
+        sendBtn = findViewById(R.id.send_btn_chat_detail)
+
+        // view listener 초기화
+        sendBtn.setOnClickListener(this)
+
         recyclerView = findViewById(R.id.recyclerview_chat_detail)
         recyclerView.setHasFixedSize(true)
 
@@ -133,6 +145,14 @@ class ChatDetailActivity : AppCompatActivity() {
         }finally{
             buf.close()
 
+        }
+    }
+
+    override fun onClick(v: View) {
+        when(v.id){
+            R.id.send_btn_chat_detail -> {
+                Log.d("Button : ", "Chat Detail Send")
+            }
         }
     }
 }
