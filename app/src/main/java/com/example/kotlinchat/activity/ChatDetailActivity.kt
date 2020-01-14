@@ -2,29 +2,24 @@ package com.example.kotlinchat.activity
 
 import android.content.ContentValues
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.isDigitsOnly
 import androidx.core.view.get
+import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinchat.R
-import com.example.kotlinchat.adapter.ChatSelectGroupAdapter
 import com.example.kotlinchat.adapter.PartialChatGroupAdapter
-import com.example.kotlinchat.data.chatbot.ChatbotSource
 import com.example.kotlinchat.data.chatbot.PartialChatBotSource
-import com.example.kotlinchat.data.user.LoginData
 import com.example.kotlinchat.network.CreateBotNetworkTask
-import com.example.kotlinchat.network.NetworkLoginTask
-import org.w3c.dom.Text
 import java.io.BufferedReader
-import java.io.File
 import java.io.FileReader
 import java.io.IOException
+
 
 class ChatDetailActivity : AppCompatActivity(), View.OnClickListener  {
 
@@ -64,7 +59,6 @@ class ChatDetailActivity : AppCompatActivity(), View.OnClickListener  {
 
         recyclerView = findViewById(R.id.recyclerview_chat_detail)
         recyclerView.setHasFixedSize(true)
-
 //        val linearLayoutManager: LinearLayoutManager = LinearLayoutManager(applicationContext)
 //        linearLayoutManager.stackFromEnd = true
 //        recyclerView.layoutManager = linearLayoutManager

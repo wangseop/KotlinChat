@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.ChatDetailActivity"></activity>
+        <activity android:name=".activity.ChatDetailPopUpActivity"
+            android:theme="@style/Widget.AppCompat.Light.PopupMenu"></activity>
+        <activity android:name=".activity.ChatDetailActivity" />
         <activity android:name=".activity.ChatSelectActivity" />
         <activity android:name=".activity.LatestMessagesActivity" />
         <activity android:name=".activity.MainActivity" />

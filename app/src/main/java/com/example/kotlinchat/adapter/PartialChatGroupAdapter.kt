@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinchat.R
 import com.example.kotlinchat.activity.ChatDetailActivity
+import com.example.kotlinchat.activity.ChatDetailPopUpActivity
 import com.example.kotlinchat.data.chatbot.ChatbotSource
 import com.example.kotlinchat.data.chatbot.PartialChatBotSource
 import com.example.kotlinchat.viewholder.ChatDetailViewHolder
@@ -34,7 +35,7 @@ class PartialChatGroupAdapter(val mPartialChat : ArrayList<PartialChatBotSource>
 
             bindHolder.chatDetailText.text = chatSrc.message
             bindHolder.itemView.setOnClickListener{       // 클릭시 텍스트 창 뜨게
-
+//                mContext.startActivity(Intent(mContext, ChatDetailPopUpActivity::class.java))
             }
         }
     }
