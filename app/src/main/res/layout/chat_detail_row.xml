@@ -1,59 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-
-    <TextView
-        android:id="@+id/chat_detail_item_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Q"
-        android:textSize="20sp"
-        android:padding="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/chat_detail_item_text"/>
-
-    <TextView
-        android:id="@+id/chat_detail_item_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:text="여기는 경로"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/chat_detail_item_title"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constrainedWidth="true"/>
+<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:id="@+id/chat_detail_item_row"-->
+<!--    android:focusable="true"-->
+<!--    android:clickable="true"-->
+<!--    android:background="@color/chatBackground">-->
 
 <!--    <TextView-->
 <!--        android:id="@+id/chat_detail_item_title"-->
-<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_width="30dp"-->
 <!--        android:layout_height="wrap_content"-->
-<!--        android:layout_margin="8dp"-->
 <!--        android:text="Q"-->
 <!--        android:textSize="20sp"-->
+<!--        android:padding="8dp"-->
 <!--        app:layout_constraintBottom_toBottomOf="parent"-->
 <!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"/>-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintEnd_toStartOf="@id/chat_detail_item_text"/>-->
 
 <!--    <TextView-->
 <!--        android:id="@+id/chat_detail_item_text"-->
-<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_width="0dp"-->
 <!--        android:layout_height="wrap_content"-->
-<!--        android:layout_margin="8dp"-->
+<!--        android:padding="8dp"-->
 <!--        android:text="여기는 경로"-->
 <!--        android:textSize="12sp"-->
+<!--        app:layout_constrainedWidth="true"-->
 <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
 <!--        app:layout_constraintStart_toEndOf="@id/chat_detail_item_title"-->
-<!--        app:layout_constraintTop_toTopOf="parent"/>-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+<!--    -->
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/chat_detail_item_row"
+        android:focusable="true"
+        android:clickable="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:background="@color/chatBackground">
+        <TextView
+            android:id="@+id/chat_detail_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Q"
+            android:textSize="20sp"
+            android:padding="8dp"/>
+
+        <TextView
+            android:id="@+id/chat_detail_item_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:text="여기는 경로"
+            android:textSize="12sp"
+            app:layout_constrainedWidth="true" />
+
+    </LinearLayout>
 
 
 
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

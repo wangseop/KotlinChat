@@ -2,6 +2,7 @@ package com.example.kotlinchat.activity
 
 import android.content.ContentValues
 import android.content.Intent
+import android.graphics.Canvas
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,10 +11,12 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.isDigitsOnly
 import androidx.core.view.get
-import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinchat.R
 import com.example.kotlinchat.adapter.PartialChatGroupAdapter
+import com.example.kotlinchat.controller.SwipeController
+import com.example.kotlinchat.controller.SwipeControllerActions
 import com.example.kotlinchat.data.chatbot.PartialChatBotSource
 import com.example.kotlinchat.network.CreateBotNetworkTask
 import java.io.BufferedReader
@@ -21,13 +24,15 @@ import java.io.FileReader
 import java.io.IOException
 
 
-class ChatDetailActivity : AppCompatActivity(), View.OnClickListener  {
+class ChatDetailActivity : AppCompatActivity(), View.OnClickListener{
 
     private lateinit var partialChatGroupAdapter: PartialChatGroupAdapter
     private lateinit var mPartialChat:ArrayList<PartialChatBotSource>
     private lateinit var recyclerView: RecyclerView
     private lateinit var nickname: String
     private lateinit var filePath:String
+    private var x_down:Float = .0f
+    private var x_up:Float = .0f
 
     private lateinit var sendBtn: Button
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,7 +77,36 @@ class ChatDetailActivity : AppCompatActivity(), View.OnClickListener  {
         // RecyclerView와 Adapter 연결
         recyclerView.adapter = partialChatGroupAdapter
 
+        // swipe 적용
+        acceptSwipe()
+//        val simpleCallback: ItemTouchHelper.SimpleCallback = object :
+//            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT or ItemTouchHelper.LEFT) {
+//            override fun onMove(
+//                recyclerView: RecyclerView,
+//                viewHolder: ViewHolder,
+//                target: ViewHolder
+//            ): Boolean {
+//                return false
+//            }
+//
+//            override fun onSwiped(viewHolder: ViewHolder, direction: Int) {
+//
+//                var position:Int = viewHolder.layoutPosition
+//                if (position % 2 == 1) position -= 1
+//                mPartialChat.removeAt(position)
+//                mPartialChat.removeAt(position)
+//
+//                partialChatGroupAdapter.notifyItemRemoved(position)
+//                partialChatGroupAdapter.notifyItemRemoved(position)
+//
+//            }
+//        }
+//        val itemTouchHelper = ItemTouchHelper(simpleCallback)
+//        itemTouchHelper.attachToRecyclerView(recyclerView)
     }
+
+
+
     private fun textDataInit(){
         lateinit var buf:BufferedReader
         var tellQ = false
@@ -147,6 +181,40 @@ class ChatDetailActivity : AppCompatActivity(), View.OnClickListener  {
         }
     }
 
+    private fun acceptSwipe(){
+
+        val swipeController:SwipeController = SwipeController(object : SwipeControllerActions() {
+            // 수정
+            override fun onLeftClicked(position: Int) {
+                
+            }
+
+            // delete
+            override fun onRightClicked(position: Int) {
+                var currPos = position
+                if(position % 2 == 1) currPos -= 1
+                partialChatGroupAdapter.mPartialChat.removeAt(currPos)
+                partialChatGroupAdapter.notifyItemRemoved(currPos)
+                partialChatGroupAdapter.mPartialChat.removeAt(currPos)
+                partialChatGroupAdapter.notifyItemRemoved(currPos)
+                partialChatGroupAdapter.notifyItemRangeChanged(currPos, partialChatGroupAdapter.itemCount)
+            }
+        })
+        val itemTouchHelper:ItemTouchHelper = ItemTouchHelper(swipeController)
+        itemTouchHelper.attachToRecyclerView(recyclerView)
+
+        recyclerView.addItemDecoration(object : RecyclerView.ItemDecoration() {
+            override fun onDraw(
+                c: Canvas,
+                parent: RecyclerView,
+                state: RecyclerView.State
+            ) {
+                swipeController.onDraw(c)
+            }
+        })
+    }
+
+
     override fun onClick(v: View) {
         when(v.id){
             R.id.send_btn_chat_detail -> {
@@ -172,6 +240,8 @@ class ChatDetailActivity : AppCompatActivity(), View.OnClickListener  {
             }
         }
     }
+
+
     companion object {
         //    private ActionBar actionbar;
         private const val sendInfoUrl = "http://3.15.44.44:5000/CreateBot"
