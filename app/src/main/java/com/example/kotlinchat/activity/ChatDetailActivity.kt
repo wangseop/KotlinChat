@@ -229,12 +229,15 @@ class ChatDetailActivity : AppCompatActivity(), View.OnClickListener{
         when(v.id){
             R.id.send_btn_chat_detail -> {
                 Log.d("Button : ", "Chat Detail Send")
-                val detailView:RecyclerView = this.findViewById<RecyclerView>(R.id.recyclerview_chat_detail)
                 var count = 0
                 var fullContexts = ""
-                while(count < detailView.childCount){
-                    val itemTitle:String = detailView[count].findViewById<TextView>(R.id.chat_detail_item_title).text.toString()
-                    val itemText:String = detailView[count++].findViewById<TextView>(R.id.chat_detail_item_text).text.toString()
+                val size = partialChatGroupAdapter.mPartialChat.size
+                val partialChat:ArrayList<PartialChatBotSource> = partialChatGroupAdapter.mPartialChat
+                while(count < size){
+                    var itemTitle:String = ""
+                    if(partialChat[count].isQ) itemTitle = "Q"
+                    else itemTitle = "A"
+                    val itemText:String = partialChat[count++].message
                     Log.d("Item Context -  ", "$itemTitle : $itemText")
                     fullContexts += "$itemTitle : $itemText ///"
                 }
