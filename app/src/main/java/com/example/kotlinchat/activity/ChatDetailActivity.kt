@@ -1,6 +1,7 @@
 package com.example.kotlinchat.activity
 
 import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
 import android.graphics.Canvas
 import android.os.Bundle
@@ -26,11 +27,16 @@ import java.io.IOException
 
 class ChatDetailActivity : AppCompatActivity(), View.OnClickListener{
 
+    val requestEdit:Int = 0
+    val resultOK:Int =  1
+    val resultFAIL:Int = 2
+
     private lateinit var partialChatGroupAdapter: PartialChatGroupAdapter
     private lateinit var mPartialChat:ArrayList<PartialChatBotSource>
     private lateinit var recyclerView: RecyclerView
     private lateinit var nickname: String
     private lateinit var filePath:String
+    private val mContext: Context = this
     private var x_down:Float = .0f
     private var x_up:Float = .0f
 
@@ -182,11 +188,15 @@ class ChatDetailActivity : AppCompatActivity(), View.OnClickListener{
     }
 
     private fun acceptSwipe(){
-
         val swipeController:SwipeController = SwipeController(object : SwipeControllerActions() {
             // 수정
             override fun onLeftClicked(position: Int) {
-                
+                val intent:Intent = Intent(mContext, ChatDetailEditActivity::class.java)
+                intent.putExtra("context", partialChatGroupAdapter.mPartialChat[position].message)
+                intent.putExtra("position", position)
+
+                startActivityForResult(intent, requestEdit)
+
             }
 
             // delete
@@ -220,7 +230,6 @@ class ChatDetailActivity : AppCompatActivity(), View.OnClickListener{
             R.id.send_btn_chat_detail -> {
                 Log.d("Button : ", "Chat Detail Send")
                 val detailView:RecyclerView = this.findViewById<RecyclerView>(R.id.recyclerview_chat_detail)
-
                 var count = 0
                 var fullContexts = ""
                 while(count < detailView.childCount){
@@ -237,10 +246,27 @@ class ChatDetailActivity : AppCompatActivity(), View.OnClickListener{
                 val task = CreateBotNetworkTask(sendInfoUrl, values)
                 task.execute()
 
+//                finish()
             }
         }
     }
 
+
+    // 수정 결과 확인
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(requestCode == requestEdit){
+            if(resultCode == resultOK){
+                val intent:Intent = data as Intent
+
+                val pos:Int = intent.getIntExtra("position", 0)
+                val editContext:String = intent.getStringExtra("context")
+                partialChatGroupAdapter.mPartialChat[pos].message = editContext
+                partialChatGroupAdapter.notifyItemChanged(pos)
+            }
+        }
+    }
 
     companion object {
         //    private ActionBar actionbar;
