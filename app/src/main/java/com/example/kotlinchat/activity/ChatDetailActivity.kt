@@ -31,11 +31,14 @@ class ChatDetailActivity : AppCompatActivity(), View.OnClickListener{
     val resultOK:Int =  1
     val resultFAIL:Int = 2
 
+    var chatDetailResult:Int = 0
+
     private lateinit var partialChatGroupAdapter: PartialChatGroupAdapter
     private lateinit var mPartialChat:ArrayList<PartialChatBotSource>
     private lateinit var recyclerView: RecyclerView
     private lateinit var nickname: String
     private lateinit var filePath:String
+    private lateinit var otherName: String
     private val mContext: Context = this
     private var x_down:Float = .0f
     private var x_up:Float = .0f
@@ -121,6 +124,7 @@ class ChatDetailActivity : AppCompatActivity(), View.OnClickListener{
             val texts:List<String> = buf.readLines()
             val questioner = "회원님 : "
             val respondent:String = texts[0].substringBefore("님과").substring(1) + ": "
+            otherName = respondent.substringBefore(" :")
             var startIdx:Int = 0
 
             Log.d("respondent size", ""+respondent.length)
@@ -235,21 +239,34 @@ class ChatDetailActivity : AppCompatActivity(), View.OnClickListener{
                 val partialChat:ArrayList<PartialChatBotSource> = partialChatGroupAdapter.mPartialChat
                 while(count < size){
                     var itemTitle:String = ""
-                    if(partialChat[count].isQ) itemTitle = "Q"
-                    else itemTitle = "A"
+                    var mark:String = "##"
+                    if(partialChat[count].isQ){
+                        itemTitle = "Q"
+                        mark = "#@@#"
+                    }
+                    else{
+                        itemTitle = "A"
+                        mark = "@##@"
+                    }
                     val itemText:String = partialChat[count++].message
                     Log.d("Item Context -  ", "$itemTitle : $itemText")
-                    fullContexts += "$itemTitle : $itemText ///"
+                    fullContexts += "$itemTitle : $itemText $mark"
                 }
 
                 val values = ContentValues()
 //                val autoChecked = autoLogin.isChecked
                 values.put("contexts", fullContexts)
                 values.put("nick", nickname)
-                val task = CreateBotNetworkTask(sendInfoUrl, values)
+                values.put("indexName", otherName)
+                Log.d("chat_index", "채팅내용 생성 $otherName")
+                val task = CreateBotNetworkTask(sendInfoUrl, values, this)
                 task.execute()
 
-//                finish()
+                val intent:Intent = Intent()
+                intent.putExtra("otherName", otherName)
+                setResult(chatDetailResult, intent)
+
+                finish()
             }
         }
     }

@@ -38,7 +38,7 @@ class MessageAdapter(val mChatMessage : ArrayList<ChatMessage>, val mContext: Co
             bindHolder = holder as MessageViewHolder
             bindHolder.show_message.setText(chat.message)
             bindHolder.nick.setText(chat.sender)
-            bindHolder.profile_image.setImageResource(R.drawable.tan)
+            bindHolder.profile_image.setImageResource(R.drawable.crop_girl)
         }
         else{
             bindHolder = holder as MessageViewHolder

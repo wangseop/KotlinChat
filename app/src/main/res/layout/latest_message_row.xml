@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="120dp">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/chat_profile"
         android:layout_width="64dp"
         android:layout_height="64dp"
@@ -13,7 +13,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/round_tan" />
+        android:src="@drawable/crop_girl" />
 
     <TextView
         android:id="@+id/chat_profile_name"

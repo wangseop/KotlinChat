@@ -28,9 +28,12 @@ class NetworkTask(val msgAdapter: MessageAdapter, val recyclerView: RecyclerView
             Log.d("JSONRESULT", result)
             val jsonParser:JSONParser = JSONParser()
             val jsonObject: JSONObject = jsonParser.parse(result) as JSONObject
+            val sender:String = jsonObject["sender"] as String
+            val receiver:String = jsonObject["receiver"] as String
+            val msg:String = jsonObject["message"] as String
 
-            val chatMessage: ChatMessage = ChatMessage(MSG_LEFT, jsonObject.get("sender") as String,
-                jsonObject.get("receiver") as String, jsonObject.get("message") as String)
+            val chatMessage: ChatMessage = ChatMessage(MSG_LEFT, sender,
+                receiver, msg)
 
             msgAdapter.addChat(chatMessage)
             recyclerView.smoothScrollToPosition(msgAdapter.itemCount - 1)

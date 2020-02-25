@@ -14,7 +14,7 @@
             android:id="@+id/profile_image"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:src="@drawable/tan" />
+            android:src="@drawable/crop_girl" />
         <TextView
             android:id="@+id/nick"
             android:layout_width="wrap_content"

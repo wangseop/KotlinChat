@@ -9,9 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinchat.R
 import com.example.kotlinchat.adapter.ChatSelectGroupAdapter
 import com.example.kotlinchat.data.chatbot.ChatbotSource
+import com.example.kotlinchat.data.group.ChatUser
 import java.io.*
 
 class ChatSelectActivity : AppCompatActivity() {
+
+    private val chatDetailRequest:Int = 1
+    private val chatDetailResult:Int = 1
 
     private lateinit var chatSelectGroupAdapter: ChatSelectGroupAdapter
     private lateinit var mSelectChat:ArrayList<ChatbotSource>
@@ -25,6 +29,21 @@ class ChatSelectActivity : AppCompatActivity() {
         createInit()
 
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        Log.d("onActivityResult", "exit " + requestCode)
+
+        if(requestCode == chatDetailRequest){        // chatSelectAcitivity 종료시
+            // 챗봇 정상적으로 생성시
+            if(resultCode == chatDetailResult){
+                val intent:Intent = data as Intent
+                val otherName:String = intent.getStringExtra("otherName") + "(아바타)"
+                setResult(chatDetailResult)
+                finish()
+            }
+        }
     }
 
 

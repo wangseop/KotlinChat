@@ -17,31 +17,37 @@ import com.example.kotlinchat.viewholder.ChatUserViewHolder
 
 class ChatUserGroupAdapter(val mUser : ArrayList<ChatUser>, val mContext: Context, val nickname: String) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val chatSelectResult:Int = 1
+    private val chatSelectRequest:Int = 1
     init{
-        mUser.add(ChatUser(false, "", "", ""))
+        mUser.add(ChatUser(false, 0, "", ""))
         Log.d("Message Adapter AddChat", ""+(mUser.size-1))
         notifyItemInserted(mUser.size-1)
 
-        addChatUser(ChatUser(true, "", "nick", ""))
+//        addChatUser(ChatUser(true, R.drawable.round_crop_girl, "아린", ""))
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         lateinit var viewHolder : RecyclerView.ViewHolder
+        Log.d("OnCreateViewHolder", "latest_message_")
 
         // User 아닐 경우
         when (viewType){
             0 -> {
+                Log.d("ChatUserGroupAdapter", "onCreateViewHolder 0")
                 val view = LayoutInflater.from(mContext).inflate(R.layout.latest_message_plus, parent, false)
                 viewHolder = ChatUserPlusViewHolder(view)
 
             }
             1 -> {
+                Log.d("ChatUserGroupAdapter", "onCreateViewHolder 1")
                 val view = LayoutInflater.from(mContext).inflate(R.layout.latest_message_row, parent, false)
                 view.setOnClickListener{
                     val intent = Intent(mContext, ChatBotActivity::class.java)
-
+                    // + 버튼 고려해서 mUser.size-2 위치로 설정
+                    val indexName:String = mUser[mUser.size-2].username
+                    Log.d("indexName", indexName)
 //                intent.putExtra("nick", pref.getString("id",null))
                     intent.putExtra("nick", nickname)
+                    intent.putExtra("indexName", indexName)
                     // 쿠키값 전달
 //                intent.putExtra("cookie", jsonMap["cookie"])
                     mContext.startActivity(intent)
@@ -60,7 +66,7 @@ class ChatUserGroupAdapter(val mUser : ArrayList<ChatUser>, val mContext: Contex
         val type:Int = holder.itemViewType
         if (type == 1){
             val bindHolder = holder as ChatUserViewHolder
-            bindHolder.profile_image.setImageResource(R.drawable.round_tan)
+            bindHolder.profile_image.setImageResource(R.drawable.crop_girl)
             bindHolder.profile_name.setText(user.username)
             bindHolder.latest_msg.setText(user.latestMessage)
 
@@ -74,7 +80,7 @@ class ChatUserGroupAdapter(val mUser : ArrayList<ChatUser>, val mContext: Contex
 //                mContext.startActivity(intent)
 
                 val latestMessagesActivity:LatestMessagesActivity = mContext as LatestMessagesActivity
-                latestMessagesActivity.startActivityForResult(intent, chatSelectResult)
+                latestMessagesActivity.startActivityForResult(intent, chatSelectRequest)
 
 
 
@@ -93,8 +99,10 @@ class ChatUserGroupAdapter(val mUser : ArrayList<ChatUser>, val mContext: Contex
     }
 
     fun addChatUser(user:ChatUser){
+        Log.d("Chat User Add", user.username)
         mUser.add(mUser.size - 1, user)
         Log.d("Message Adapter AddChat", ""+(mUser.size-2))
+        // 추가되는 user의 위치 : 마지막 직전 index
         notifyItemInserted(mUser.size-2)
 
     }

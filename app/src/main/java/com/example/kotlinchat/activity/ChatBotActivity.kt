@@ -24,8 +24,10 @@ class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
     private val MSG_LEFT:Int = 1
     private val MSG_RIGHT:Int = 2
 
-    private var nick: String = "nick"
+    private var id: String = "nick"
+    private var nick: String = "유승효"
     private var cookie: String = ""
+    private lateinit var indexName: String
     private lateinit var button_attach: ImageButton
     private lateinit var editText_chat: EditText
     private lateinit var button_send: ImageButton
@@ -45,7 +47,9 @@ class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_chat_bot)
 
         var intent: Intent = this.intent
-        nick = intent.getStringExtra("nick")
+        id = intent.getStringExtra("nick")
+        indexName = intent.getStringExtra("indexName") as String
+        Log.d("ChatbotActivity", "onCreate : (indexName : $indexName)")
 //        // 액션바
 //        mapActionbar = (Toolbar)findViewById(R.id.chat_toolbar);
 //
@@ -99,14 +103,16 @@ class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
         if (msg != null){
 
             // 내가 입력한 메세지 전송
-            val chatMessage:ChatMessage = ChatMessage(MSG_RIGHT, nick, "Trigobot", msg)
+            val chatMessage:ChatMessage = ChatMessage(MSG_RIGHT, nick, indexName, msg)
 
+            Log.d("Right Message", chatMessage.toString())
             messageAdapter.addChat(chatMessage)
             recyclerView.smoothScrollToPosition(messageAdapter.itemCount - 1)
 
             val contentValues: ContentValues = ContentValues()
             contentValues.put("name", nick)
             contentValues.put("msg", msg)
+            contentValues.put("indexName", indexName)
 //            contentValues.put("cookie", cookie);
 
             editText_chat.setText("")

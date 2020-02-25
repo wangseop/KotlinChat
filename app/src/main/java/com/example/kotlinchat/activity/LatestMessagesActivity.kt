@@ -12,6 +12,8 @@ import com.example.kotlinchat.data.group.ChatUser
 
 class LatestMessagesActivity : AppCompatActivity() {
 
+    private val chatSelectRequest:Int = 1
+    private val chatSelectResult:Int = 1
     private lateinit var chatUserGroupAdapter: ChatUserGroupAdapter
     private lateinit var mUser:ArrayList<ChatUser>
     private lateinit var recyclerView: RecyclerView
@@ -27,8 +29,15 @@ class LatestMessagesActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         Log.d("onActivityResult", "exit " + requestCode)
 
-        if(requestCode == 1){        // chatSelectAcitivity 종료시
-            chatUserGroupAdapter.addChatUser(ChatUser(true, "", "nick", ""))
+        if(requestCode == chatSelectRequest){        // chatSelectAcitivity 종료시
+            var otherName:String = "아린(아바타)"
+            if(resultCode == chatSelectResult)
+            {
+                val intent:Intent = data as Intent
+                otherName = intent.getStringExtra("otherName")
+            }
+
+            chatUserGroupAdapter.addChatUser(ChatUser(true, R.drawable.crop_girl, otherName, ""))
         }
     }
 

@@ -64,7 +64,7 @@
             android:layout_height="match_parent"
             android:padding="8dp"
             android:text="여기는 경로"
-            android:textSize="12sp"
+            android:textSize="16sp"
             app:layout_constrainedWidth="true" />
 
     </LinearLayout>

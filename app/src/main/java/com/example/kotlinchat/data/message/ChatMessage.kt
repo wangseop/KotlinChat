@@ -6,6 +6,9 @@ class ChatMessage constructor(_msgType: Int, _sender:String, _receiver:String, _
     var receiver: String = _receiver
     var message: String = _message
 
+    override fun toString(): String {
+        return "msgType : $msgType, sender : $sender, receiver : $receiver, message : $message"
+    }
 //    constructor(msgType:Int, sender:String, receiver:String, message:String){
 //        this.msgType = msgType
 //        this.sender = sender
