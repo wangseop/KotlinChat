@@ -1,6 +1,7 @@
 package com.example.kotlinchat.network
 
 import android.content.ContentValues
+import android.content.Intent
 import android.os.AsyncTask
 import android.util.Log
 import com.example.kotlinchat.activity.ChatDetailActivity
@@ -27,9 +28,20 @@ class CreateBotNetworkTask(val url: String, val values: ContentValues, val mCont
             val jsonParser: JSONParser = JSONParser()
             val jsonObject: JSONObject = jsonParser.parse(result) as JSONObject
             val result:String = jsonObject["result"] as String
+            val otherName:String = jsonObject["otherName"] as String
             Log.d("CreateBot Result :", result)
             if(result.equals("성공"))
                 mContext.chatDetailResult = 1
+
+
+            // 챗봇 채팅선택목록 끄기
+            val chatDetailActivity:ChatDetailActivity = mContext as ChatDetailActivity
+
+            val intent: Intent = Intent()
+            intent.putExtra("otherName", otherName)
+            chatDetailActivity.setResult(chatDetailActivity.chatDetailResult, intent)
+
+            chatDetailActivity.finish()
 
         }catch(e : ParseException) {
             e.printStackTrace()

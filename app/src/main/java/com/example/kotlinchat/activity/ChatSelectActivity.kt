@@ -33,14 +33,17 @@ class ChatSelectActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        Log.d("onActivityResult", "exit " + requestCode)
+        Log.d("ChatSelectActivity", "onActivityResult")
 
         if(requestCode == chatDetailRequest){        // chatSelectAcitivity 종료시
+            Log.d("ChatSelectActivity", "onActivityResult requestCode : " + requestCode)
+
             // 챗봇 정상적으로 생성시
             if(resultCode == chatDetailResult){
+                Log.d("ChatSelectActivity", "onActivityResult resultCode : " + resultCode)
                 val intent:Intent = data as Intent
                 val otherName:String = intent.getStringExtra("otherName") + "(아바타)"
-                setResult(chatDetailResult)
+                setResult(chatDetailResult, intent)
                 finish()
             }
         }

@@ -262,11 +262,7 @@ class ChatDetailActivity : AppCompatActivity(), View.OnClickListener{
                 val task = CreateBotNetworkTask(sendInfoUrl, values, this)
                 task.execute()
 
-                val intent:Intent = Intent()
-                intent.putExtra("otherName", otherName)
-                setResult(chatDetailResult, intent)
 
-                finish()
             }
         }
     }
@@ -275,7 +271,7 @@ class ChatDetailActivity : AppCompatActivity(), View.OnClickListener{
     // 수정 결과 확인
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
+        Log.d("ChatDetailActivity", "onActivityResult")
         if(requestCode == requestEdit){
             if(resultCode == resultOK){
                 val intent:Intent = data as Intent
