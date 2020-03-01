@@ -257,7 +257,7 @@ class ChatDetailActivity : AppCompatActivity(), View.OnClickListener{
 //                val autoChecked = autoLogin.isChecked
                 values.put("contexts", fullContexts)
                 values.put("nick", nickname)
-                values.put("indexName", otherName)
+                values.put("indexName", "$otherName")
                 Log.d("chat_index", "채팅내용 생성 $otherName")
                 val task = CreateBotNetworkTask(sendInfoUrl, values, this)
                 task.execute()

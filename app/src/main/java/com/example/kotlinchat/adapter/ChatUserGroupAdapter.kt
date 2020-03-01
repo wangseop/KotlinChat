@@ -43,7 +43,7 @@ class ChatUserGroupAdapter(val mUser : ArrayList<ChatUser>, val mContext: Contex
                 view.setOnClickListener{
                     val intent = Intent(mContext, ChatBotActivity::class.java)
                     // + 버튼 고려해서 mUser.size-2 위치로 설정
-                    val indexName:String = mUser[mUser.size-2].username
+                    val indexName:String = "${mUser[mUser.size-2].username}"
                     Log.d("indexName", indexName)
 //                intent.putExtra("nick", pref.getString("id",null))
                     intent.putExtra("nick", nickname)
@@ -67,7 +67,7 @@ class ChatUserGroupAdapter(val mUser : ArrayList<ChatUser>, val mContext: Contex
         if (type == 1){
             val bindHolder = holder as ChatUserViewHolder
             bindHolder.profile_image.setImageResource(R.drawable.crop_girl)
-            bindHolder.profile_name.setText(user.username)
+            bindHolder.profile_name.text = "${user.username}(아바타)"
             bindHolder.latest_msg.setText(user.latestMessage)
 
         }else{

@@ -35,7 +35,7 @@ class CreateBotNetworkTask(val url: String, val values: ContentValues, val mCont
 
 
             // 챗봇 채팅선택목록 끄기
-            val chatDetailActivity:ChatDetailActivity = mContext as ChatDetailActivity
+            val chatDetailActivity:ChatDetailActivity = mContext
 
             val intent: Intent = Intent()
             intent.putExtra("otherName", otherName)

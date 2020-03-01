@@ -112,7 +112,7 @@ class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
             val contentValues: ContentValues = ContentValues()
             contentValues.put("name", nick)
             contentValues.put("msg", msg)
-            contentValues.put("indexName", indexName)
+            contentValues.put("indexName", indexName.replace(" ", ""))
 //            contentValues.put("cookie", cookie);
 
             editText_chat.setText("")

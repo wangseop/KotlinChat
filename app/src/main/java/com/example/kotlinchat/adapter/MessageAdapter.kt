@@ -37,7 +37,7 @@ class MessageAdapter(val mChatMessage : ArrayList<ChatMessage>, val mContext: Co
         if (type == MSG_LEFT){
             bindHolder = holder as MessageViewHolder
             bindHolder.show_message.setText(chat.message)
-            bindHolder.nick.setText(chat.sender)
+            bindHolder.nick.text = "${chat.sender}(아바타)"
             bindHolder.profile_image.setImageResource(R.drawable.crop_girl)
         }
         else{

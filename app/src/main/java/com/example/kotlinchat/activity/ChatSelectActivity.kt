@@ -42,7 +42,7 @@ class ChatSelectActivity : AppCompatActivity() {
             if(resultCode == chatDetailResult){
                 Log.d("ChatSelectActivity", "onActivityResult resultCode : " + resultCode)
                 val intent:Intent = data as Intent
-                val otherName:String = intent.getStringExtra("otherName") + "(아바타)"
+                val otherName:String = intent.getStringExtra("otherName")
                 setResult(chatDetailResult, intent)
                 finish()
             }
