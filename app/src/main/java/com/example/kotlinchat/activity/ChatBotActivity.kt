@@ -48,6 +48,7 @@ class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
 
         var intent: Intent = this.intent
         id = intent.getStringExtra("nick")
+        nick = intent.getStringExtra("nick")
         indexName = intent.getStringExtra("indexName") as String
         Log.d("ChatbotActivity", "onCreate : (indexName : $indexName)")
 //        // 액션바

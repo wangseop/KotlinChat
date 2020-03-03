@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeNoActionBar">
-        <activity android:name=".activity.ChatDetailEditActivity"></activity>
+        <activity android:name=".activity.SignupActivity"></activity>
+        <activity android:name=".activity.ChatDetailEditActivity" />
         <activity android:name=".activity.ChatDetailPopUpActivity" />
         <activity android:name=".activity.ChatDetailActivity" />
         <activity android:name=".activity.ChatSelectActivity" />

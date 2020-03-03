@@ -30,7 +30,7 @@ class LatestMessagesActivity : AppCompatActivity() {
         Log.d("onActivityResult", "exit " + requestCode)
 
         if(requestCode == chatSelectRequest){        // chatSelectAcitivity 종료시
-            var otherName:String = "아린(아바타)"
+            var otherName:String = "아린"
             if(resultCode == chatSelectResult)
             {
                 val intent:Intent = data as Intent
