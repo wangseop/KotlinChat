@@ -12,7 +12,7 @@ import com.example.kotlinchat.activity.ChatSelectActivity
 import com.example.kotlinchat.data.chatbot.ChatbotSource
 import com.example.kotlinchat.viewholder.ChatSelectViewHolder
 
-class ChatSelectGroupAdapter(val mSelectChat : ArrayList<ChatbotSource>, val mContext: Context, val nickname: String) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class ChatSelectGroupAdapter(val mSelectChat : ArrayList<ChatbotSource>, val mContext: Context, val nickname: String, val id:String) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     private val chatSelectRequest:Int = 1
 
@@ -35,6 +35,7 @@ class ChatSelectGroupAdapter(val mSelectChat : ArrayList<ChatbotSource>, val mCo
                 val intent: Intent = Intent(mContext, ChatDetailActivity::class.java)
                 intent.putExtra("path", chatSrc.directorySrc)
                 intent.putExtra("nick", nickname)
+                intent.putExtra("id", id)
 
                 val prevActivity:ChatSelectActivity = mContext as ChatSelectActivity
                 prevActivity.startActivityForResult(intent, chatSelectRequest)

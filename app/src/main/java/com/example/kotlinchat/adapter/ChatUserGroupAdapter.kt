@@ -15,7 +15,7 @@ import com.example.kotlinchat.viewholder.ChatUserPlusViewHolder
 import com.example.kotlinchat.viewholder.ChatUserViewHolder
 
 
-class ChatUserGroupAdapter(val mUser : ArrayList<ChatUser>, val mContext: Context, val nickname: String) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ChatUserGroupAdapter(val mUser : ArrayList<ChatUser>, val mContext: Context, val nickname: String, val id:String) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val chatSelectRequest:Int = 1
     init{
@@ -77,6 +77,7 @@ class ChatUserGroupAdapter(val mUser : ArrayList<ChatUser>, val mContext: Contex
                 // 우선 startActivity로 처리
                 val intent:Intent = Intent(mContext, ChatSelectActivity::class.java)
                 intent.putExtra("nick", nickname)
+                intent.putExtra("id", id)
 //                mContext.startActivity(intent)
 
                 val latestMessagesActivity:LatestMessagesActivity = mContext as LatestMessagesActivity

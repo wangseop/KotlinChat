@@ -37,6 +37,7 @@ class ChatDetailActivity : AppCompatActivity(), View.OnClickListener{
     private lateinit var mPartialChat:ArrayList<PartialChatBotSource>
     private lateinit var recyclerView: RecyclerView
     private lateinit var nickname: String
+    private lateinit var id: String
     private lateinit var filePath:String
     private lateinit var otherName: String
     private val mContext: Context = this
@@ -45,6 +46,8 @@ class ChatDetailActivity : AppCompatActivity(), View.OnClickListener{
 
     private lateinit var sendBtn: Button
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("ChatDetailActivity", "onCreate")
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_detail)
 
@@ -57,9 +60,15 @@ class ChatDetailActivity : AppCompatActivity(), View.OnClickListener{
 
 
     private fun getIntentExtra(){
+        Log.d("ChatDetailActivity", "getIntentExtra")
+
         var intent: Intent = this.intent
         filePath = intent.getStringExtra("path")
         nickname = intent.getStringExtra("nick")
+        id = intent.getStringExtra("id")
+
+        Log.d("ChatDetailActivity", "id : $id , nickname : $nickname")
+
     }
 
 
@@ -257,6 +266,7 @@ class ChatDetailActivity : AppCompatActivity(), View.OnClickListener{
 //                val autoChecked = autoLogin.isChecked
                 values.put("contexts", fullContexts)
                 values.put("nick", nickname)
+                values.put("id", id)
                 values.put("indexName", "$otherName")
                 Log.d("chat_index", "채팅내용 생성 $otherName")
                 val task = CreateBotNetworkTask(sendInfoUrl, values, this)

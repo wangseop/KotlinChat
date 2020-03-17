@@ -18,6 +18,7 @@ class LatestMessagesActivity : AppCompatActivity() {
     private lateinit var mUser:ArrayList<ChatUser>
     private lateinit var recyclerView: RecyclerView
     private lateinit var nickname: String
+    private lateinit var id: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_latest_messages)
@@ -44,6 +45,7 @@ class LatestMessagesActivity : AppCompatActivity() {
     private fun getIntentExtra(){
         var intent: Intent = this.intent
         nickname = intent.getStringExtra("nick")
+        id = intent.getStringExtra("id")
     }
 
     private fun createInit(){
@@ -58,7 +60,7 @@ class LatestMessagesActivity : AppCompatActivity() {
         mUser = ArrayList<ChatUser>()
 
         // MessageAdapter 설정
-        chatUserGroupAdapter = ChatUserGroupAdapter(mUser, this, nickname)
+        chatUserGroupAdapter = ChatUserGroupAdapter(mUser, this, nickname, id)
 
         // RecyclerView와 Adapter 연결
         recyclerView.adapter = chatUserGroupAdapter

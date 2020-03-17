@@ -21,9 +21,12 @@ class ChatSelectActivity : AppCompatActivity() {
     private lateinit var mSelectChat:ArrayList<ChatbotSource>
     private lateinit var recyclerView: RecyclerView
     private lateinit var nickname: String
+    private lateinit var id: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("ChatSelectActivity", "OnCreate")
+
         setContentView(R.layout.activity_chat_select)
         getIntentExtra()
         createInit()
@@ -51,8 +54,13 @@ class ChatSelectActivity : AppCompatActivity() {
 
 
     private fun getIntentExtra(){
+        Log.d("ChatSelectActivity", "getIntentExtra")
+
         var intent: Intent = this.intent
         nickname = intent.getStringExtra("nick")
+        id = intent.getStringExtra("id")
+
+        Log.d("getIntentExtra", "$nickname , $id")
     }
 
     private fun createInit(){
@@ -67,7 +75,7 @@ class ChatSelectActivity : AppCompatActivity() {
         mSelectChat = ArrayList<ChatbotSource>()
 
         // MessageAdapter 설정
-        chatSelectGroupAdapter = ChatSelectGroupAdapter(mSelectChat, this, nickname)
+        chatSelectGroupAdapter = ChatSelectGroupAdapter(mSelectChat, this, nickname, id)
 
         // RecyclerView와 Adapter 연결
         recyclerView.adapter = chatSelectGroupAdapter

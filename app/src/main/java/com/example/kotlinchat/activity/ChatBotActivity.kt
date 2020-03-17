@@ -2,22 +2,25 @@ package com.example.kotlinchat.activity
 
 import android.content.ContentValues
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.RelativeLayout
-import androidx.appcompat.widget.Toolbar
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinchat.R
 import com.example.kotlinchat.adapter.MessageAdapter
 import com.example.kotlinchat.data.message.ChatMessage
 import com.example.kotlinchat.network.NetworkTask
+
 
 class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -32,7 +35,7 @@ class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var editText_chat: EditText
     private lateinit var button_send: ImageButton
     private lateinit var selectImgLayout: RelativeLayout
-    private lateinit var mapActionbar: Toolbar
+//    private lateinit var mapActionbar: Toolbar
 
     private val welcomePath: String = "http://3.15.44.44:5000/"
     private val messagePath: String = "http://3.15.44.44:5000/msg"
@@ -51,18 +54,14 @@ class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
         nick = intent.getStringExtra("nick")
         indexName = intent.getStringExtra("indexName") as String
         Log.d("ChatbotActivity", "onCreate : (indexName : $indexName)")
-//        // 액션바
-//        mapActionbar = (Toolbar)findViewById(R.id.chat_toolbar);
-//
-//        setSupportActionBar(mapActionbar);
-//        ActionBar actionBar = getSupportActionBar();
-//        actionBar.setTitle("Trigo");
-//        // 액션바 뒤로가기 버튼 추가
+
+        // 액션바
+        setSupportActionBar(findViewById(R.id.chat_toolbar))
+        val toolbar:ActionBar = supportActionBar as ActionBar
+        toolbar.title = indexName
+
+        // 액션바 뒤로가기 버튼 추가
 //        actionBar.setDisplayHomeAsUpEnabled(true);
-//
-//        // Manifest에 설정할 권한 부여
-//        ActivityCompat.requestPermissions(ChatActivity.this, String[]{Manifest.permission.INTERNET}, 2);
-//        ActivityCompat.requestPermissions(ChatActivity.this, new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
 
         // 문장 입력 바
         editText_chat = findViewById(R.id.editText_chat)
@@ -87,6 +86,33 @@ class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
         // RecyclerView와 Adapter 연결
         recyclerView.adapter = messageAdapter
     }
+
+    // 액션바에 메뉴 인플레이팅
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val menuInflater = menuInflater
+        menuInflater.inflate(R.menu.activity_chatbot_menu, menu)
+        return true
+    }
+
+    // 액션바 옵션 별 기능
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.action_back -> {
+            finish()
+            true
+        }
+
+        R.id.action_profile_change -> {
+
+            true
+        }
+
+        else -> {
+            // If we got here, the user's action was not recognized.
+            // Invoke the superclass to handle it.
+            super.onOptionsItemSelected(item)
+        }
+    }
+
 
     override fun onClick(v: View) {
         val animation: Animation = AnimationUtils.loadAnimation(this, R.anim.fadein)
