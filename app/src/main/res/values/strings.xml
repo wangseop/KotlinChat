@@ -5,4 +5,6 @@
     <string name="messageSingleRight">Default Message Single Right</string>
     <string name="showMap">위치 확인</string>
     <string name="autoLoginCheck">자동 로그인</string>
+    <string name="action_back">뒤로가기</string>
+    <string name="action_profile_change">사진 변경</string>
 </resources>

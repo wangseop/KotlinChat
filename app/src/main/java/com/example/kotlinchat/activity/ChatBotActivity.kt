@@ -61,7 +61,8 @@ class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
         toolbar.title = indexName
 
         // 액션바 뒤로가기 버튼 추가
-//        actionBar.setDisplayHomeAsUpEnabled(true);
+        toolbar.setDisplayHomeAsUpEnabled(true)
+        // 액션바 뒤로가기 버튼 추가
 
         // 문장 입력 바
         editText_chat = findViewById(R.id.editText_chat)
@@ -96,11 +97,10 @@ class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
 
     // 액션바 옵션 별 기능
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.action_back -> {
+        android.R.id.home->{
             finish()
             true
         }
-
         R.id.action_profile_change -> {
 
             true
