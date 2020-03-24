@@ -26,7 +26,7 @@ class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
 
     private val MSG_LEFT:Int = 1
     private val MSG_RIGHT:Int = 2
-
+    private val REQUEST_IMG_EDIT:Int = 1
     private var id: String = "nick"
     private var nick: String = "유승효"
     private var cookie: String = ""
@@ -88,6 +88,11 @@ class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
         recyclerView.adapter = messageAdapter
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
     // 액션바에 메뉴 인플레이팅
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val menuInflater = menuInflater
@@ -102,7 +107,8 @@ class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
             true
         }
         R.id.action_profile_change -> {
-
+            val intent:Intent = Intent(this, ProfileImageEditActivity::class.java)
+            this.startActivityForResult(intent, REQUEST_IMG_EDIT)
             true
         }
 
