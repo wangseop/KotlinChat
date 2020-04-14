@@ -3,6 +3,7 @@ package com.example.kotlinchat.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +20,7 @@ class LatestMessagesActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var nickname: String
     private lateinit var id: String
+    private lateinit var avatars:Array<String>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_latest_messages)
@@ -38,7 +40,7 @@ class LatestMessagesActivity : AppCompatActivity() {
                 otherName = intent.getStringExtra("otherName")
             }
 
-            chatUserGroupAdapter.addChatUser(ChatUser(true, R.drawable.crop_girl, otherName, ""))
+            chatUserGroupAdapter.addChatUser(ChatUser(true, R.drawable.default_profile, otherName, ""))
         }
     }
 
@@ -46,6 +48,9 @@ class LatestMessagesActivity : AppCompatActivity() {
         var intent: Intent = this.intent
         nickname = intent.getStringExtra("nick")
         id = intent.getStringExtra("id")
+        avatars = intent.getStringArrayExtra("avatars")
+
+
     }
 
     private fun createInit(){
@@ -64,6 +69,11 @@ class LatestMessagesActivity : AppCompatActivity() {
 
         // RecyclerView와 Adapter 연결
         recyclerView.adapter = chatUserGroupAdapter
+
+        // 챗봇 목록 있을 경우 추가
+        for (i in 0 until (avatars.size))
+            //
+            chatUserGroupAdapter.addChatUser(ChatUser(true, R.drawable.default_profile, avatars[i], ""))
     }
 }
 

@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import com.example.kotlinchat.activity.LatestMessagesActivity
 import com.example.kotlinchat.data.user.LoginData
+import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 import org.json.simple.parser.ParseException
@@ -33,14 +34,21 @@ class NetworkLoginTask(
 //        }
             val jsonParser:JSONParser = JSONParser()
             val jsonObject: JSONObject = jsonParser.parse(s) as JSONObject
-
+            val jsonArray: JSONArray = jsonObject["avatars"] as JSONArray
+            Log.d("Login Post Data", jsonObject.toString())
             if (jsonObject["state"] as String == "OK") {
                 val intent = Intent(context, LatestMessagesActivity::class.java)
                 val id:String = jsonObject["id"] as String
                 val nick:String = jsonObject["nick"] as String
+                val avatars:Array<String> = Array(jsonArray.size, {""})
+
+                for (i in  0 until jsonArray.size){
+                    avatars[i] = jsonArray[i] as String
+                }
 //                intent.putExtra("nick", pref.getString("id",null))
                 intent.putExtra("id", id)
                 intent.putExtra("nick", nick)
+                intent.putExtra("avatars", avatars)
                 Log.d("NetworkLoginTask", "onPostExecute")
                 Log.d("onPostExecute", "$id + // $nick")
                 // 쿠키값 전달

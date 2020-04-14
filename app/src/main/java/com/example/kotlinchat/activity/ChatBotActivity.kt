@@ -50,7 +50,7 @@ class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_chat_bot)
 
         var intent: Intent = this.intent
-        id = intent.getStringExtra("nick")
+        id = intent.getStringExtra("id")
         nick = intent.getStringExtra("nick")
         indexName = intent.getStringExtra("indexName") as String
         Log.d("ChatbotActivity", "onCreate : (indexName : $indexName)")
@@ -143,6 +143,7 @@ class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
             recyclerView.smoothScrollToPosition(messageAdapter.itemCount - 1)
 
             val contentValues: ContentValues = ContentValues()
+            contentValues.put("id", id)
             contentValues.put("name", nick)
             contentValues.put("msg", msg)
             contentValues.put("indexName", indexName.replace(" ", ""))
