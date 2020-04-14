@@ -16,7 +16,7 @@ import com.example.kotlinchat.viewholder.ChatUserPlusViewHolder
 import com.example.kotlinchat.viewholder.ChatUserViewHolder
 
 
-class ChatUserGroupAdapter(val mUser : ArrayList<ChatUser>, val mContext: Context, val nickname: String, val id:String) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ChatUserGroupAdapter(val mUser : ArrayList<ChatUser>, val chats:HashMap<String, Array<String>>, val mContext: Context, val nickname: String, val id:String) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val chatSelectRequest:Int = 1
 
@@ -56,10 +56,10 @@ class ChatUserGroupAdapter(val mUser : ArrayList<ChatUser>, val mContext: Contex
                     Log.d("indexName", indexName)
 
 //                intent.putExtra("nick", pref.getString("id",null))
-                    view
                     intent.putExtra("id", id)
                     intent.putExtra("nick", nickname)
                     intent.putExtra("indexName", indexName)
+                    intent.putExtra("chat", chats[indexName])
                     // 쿠키값 전달
 //                intent.putExtra("cookie", jsonMap["cookie"])
                     mContext.startActivity(intent)

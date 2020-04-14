@@ -42,6 +42,7 @@ class NetworkLoginTask(
                 val nick:String = jsonObject["nick"] as String
                 val avatars:Array<String> = Array(jsonArray.size, {""})
 
+                val chats:Map<String, Array<String>> = jsonObject["chat"] as Map<String, Array<String>>
                 for (i in  0 until jsonArray.size){
                     avatars[i] = jsonArray[i] as String
                 }
@@ -49,6 +50,16 @@ class NetworkLoginTask(
                 intent.putExtra("id", id)
                 intent.putExtra("nick", nick)
                 intent.putExtra("avatars", avatars)
+
+                // 임시로 avatar 채팅 내용 넘겨주기위해 사용
+                for (avatar in avatars){
+
+                    val tmp_chat:Array<String> = Array((chats[avatar] as JSONArray).size, {""})
+                    for (i in 0 until tmp_chat.size){
+                        tmp_chat[i] = (chats[avatar] as JSONArray)[i] as String
+                    }
+                    intent.putExtra(avatar, tmp_chat)
+                }
                 Log.d("NetworkLoginTask", "onPostExecute")
                 Log.d("onPostExecute", "$id + // $nick")
                 // 쿠키값 전달

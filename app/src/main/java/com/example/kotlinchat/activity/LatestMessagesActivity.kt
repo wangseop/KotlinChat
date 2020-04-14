@@ -21,6 +21,8 @@ class LatestMessagesActivity : AppCompatActivity() {
     private lateinit var nickname: String
     private lateinit var id: String
     private lateinit var avatars:Array<String>
+    private lateinit var chats:HashMap<String, Array<String>>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_latest_messages)
@@ -49,8 +51,18 @@ class LatestMessagesActivity : AppCompatActivity() {
         nickname = intent.getStringExtra("nick")
         id = intent.getStringExtra("id")
         avatars = intent.getStringArrayExtra("avatars")
+        chats = hashMapOf()
 
+        for (avatar in avatars){
+            chats[avatar] = intent.getStringArrayExtra(avatar)
+            val size:Int = (chats[avatar] as Array<String>).size
+            Log.d("Avatar Chat Size", "$size")
 
+            for (i in chats[avatar] as Array<String>){
+                Log.d("Avatar Chat Context", i)
+
+            }
+        }
     }
 
     private fun createInit(){
@@ -65,7 +77,7 @@ class LatestMessagesActivity : AppCompatActivity() {
         mUser = ArrayList<ChatUser>()
 
         // MessageAdapter 설정
-        chatUserGroupAdapter = ChatUserGroupAdapter(mUser, this, nickname, id)
+        chatUserGroupAdapter = ChatUserGroupAdapter(mUser, chats, this, nickname, id)
 
         // RecyclerView와 Adapter 연결
         recyclerView.adapter = chatUserGroupAdapter

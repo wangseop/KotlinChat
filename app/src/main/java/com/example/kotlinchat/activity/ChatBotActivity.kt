@@ -29,6 +29,7 @@ class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
     private val REQUEST_IMG_EDIT:Int = 1
     private var id: String = "nick"
     private var nick: String = "유승효"
+    private lateinit var chat: Array<String>
     private var cookie: String = ""
     private lateinit var indexName: String
     private lateinit var button_attach: ImageButton
@@ -44,15 +45,13 @@ class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var mchat:ArrayList<ChatMessage>
     private lateinit var recyclerView:RecyclerView
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_chat_bot)
-
+    private fun createInit(){
         var intent: Intent = this.intent
         id = intent.getStringExtra("id")
         nick = intent.getStringExtra("nick")
         indexName = intent.getStringExtra("indexName") as String
+        chat = intent.getStringArrayExtra("chat")
+
         Log.d("ChatbotActivity", "onCreate : (indexName : $indexName)")
 
         // 액션바
@@ -86,6 +85,31 @@ class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
 
         // RecyclerView와 Adapter 연결
         recyclerView.adapter = messageAdapter
+
+
+        for (i in 0 until chat.size){
+            Log.d("Chat Context", chat[i])
+            val posString = chat[i].substringAfter(" // ")
+            val context = chat[i].substringBefore(" // ")
+
+            if (posString == "left") messageAdapter.addChat(ChatMessage(MSG_LEFT, nick, indexName, context))
+            else messageAdapter.addChat(ChatMessage(MSG_RIGHT, indexName, nick, context))
+
+        }
+
+
+//        for (i in chat){
+//            Log.d("Chatting $nick with $indexName", i)
+//        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_chat_bot)
+
+        createInit()
+
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
