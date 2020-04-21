@@ -92,8 +92,8 @@ class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
             val posString = chat[i].substringAfter(" // ")
             val context = chat[i].substringBefore(" // ")
 
-            if (posString == "left") messageAdapter.addChat(ChatMessage(MSG_LEFT, nick, indexName, context))
-            else messageAdapter.addChat(ChatMessage(MSG_RIGHT, indexName, nick, context))
+            if (posString == "left") messageAdapter.addChat(ChatMessage(MSG_LEFT, indexName, nick, context))
+            else messageAdapter.addChat(ChatMessage(MSG_RIGHT, nick, indexName, context))
 
         }
 
