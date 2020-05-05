@@ -19,6 +19,7 @@ import com.example.kotlinchat.viewholder.ChatUserViewHolder
 class ChatUserGroupAdapter(val mUser : ArrayList<ChatUser>, val chats:HashMap<String, Array<String>>, val mContext: Context, val nickname: String, val id:String) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val chatSelectRequest:Int = 1
+    private val chatBotRequest:Int = 2
 
     // 아바타별 위치 저장용 변수
     private var avatarCount:Int = 0
@@ -49,6 +50,7 @@ class ChatUserGroupAdapter(val mUser : ArrayList<ChatUser>, val chats:HashMap<St
                 // + 버튼 고려해서 mUser.size-2 위치로 설정
                 avatarMap[view] =  avatarCount++
 
+
                 view.setOnClickListener{
 
                     val intent = Intent(mContext, ChatBotActivity::class.java)
@@ -62,7 +64,8 @@ class ChatUserGroupAdapter(val mUser : ArrayList<ChatUser>, val chats:HashMap<St
                     intent.putExtra("chat", chats[indexName])
                     // 쿠키값 전달
 //                intent.putExtra("cookie", jsonMap["cookie"])
-                    mContext.startActivity(intent)
+                    val activity:LatestMessagesActivity =  mContext as LatestMessagesActivity
+                    activity.startActivityForResult(intent, chatBotRequest)
                 }
                 viewHolder =  ChatUserViewHolder(view)
 

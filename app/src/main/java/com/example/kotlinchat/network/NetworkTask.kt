@@ -34,7 +34,7 @@ class NetworkTask(val msgAdapter: MessageAdapter, val recyclerView: RecyclerView
 
             val chatMessage: ChatMessage = ChatMessage(MSG_LEFT, sender,
                 receiver, msg)
-
+//            lateChat.plus("$msg // left")
             msgAdapter.addChat(chatMessage)
             recyclerView.smoothScrollToPosition(msgAdapter.itemCount - 1)
         }catch(e : ParseException) {

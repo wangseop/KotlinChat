@@ -19,19 +19,24 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinchat.R
 import com.example.kotlinchat.adapter.MessageAdapter
 import com.example.kotlinchat.data.message.ChatMessage
+import com.example.kotlinchat.network.AvatarChatTask
+import com.example.kotlinchat.network.NetworkBotCloseTask
 import com.example.kotlinchat.network.NetworkTask
 
 
 class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
 
-    private val MSG_LEFT:Int = 1
-    private val MSG_RIGHT:Int = 2
+    val MSG_LEFT:Int = 1
+    val MSG_RIGHT:Int = 2
     private val REQUEST_IMG_EDIT:Int = 1
+    val RESPONSE_CLOSE_BOT:Int = 2
     private var id: String = "nick"
     private var nick: String = "유승효"
-    private lateinit var chat: Array<String>
-    private var cookie: String = ""
     private lateinit var indexName: String
+
+    lateinit var chat: Array<String>
+    private lateinit var lateChat: Array<String>
+    private var cookie: String = ""
     private lateinit var button_attach: ImageButton
     private lateinit var editText_chat: EditText
     private lateinit var button_send: ImageButton
@@ -41,6 +46,9 @@ class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
     private val welcomePath: String = "http://3.15.44.44:5000/"
     private val messagePath: String = "http://3.15.44.44:5000/msg"
     private val messageImgPath: String = "http://3.15.44.44:5000/img"
+    private val botClosePath: String = "http://3.15.44.44:5000/botclose"
+    private val loadChatPath:String = "http://3.15.44.44:5000/loadchats"
+
     private lateinit var messageAdapter: MessageAdapter
     private lateinit var mchat:ArrayList<ChatMessage>
     private lateinit var recyclerView:RecyclerView
@@ -50,7 +58,9 @@ class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
         id = intent.getStringExtra("id")
         nick = intent.getStringExtra("nick")
         indexName = intent.getStringExtra("indexName") as String
-        chat = intent.getStringArrayExtra("chat")
+
+        // 현재 챗봇 activity 종료 시 채팅 방에 추가될 채팅 내용 담는 array
+//        lateChat = arrayOf<String>()
 
         Log.d("ChatbotActivity", "onCreate : (indexName : $indexName)")
 
@@ -86,16 +96,17 @@ class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
         // RecyclerView와 Adapter 연결
         recyclerView.adapter = messageAdapter
 
+        val contentValues: ContentValues = ContentValues()
+        contentValues.put("id", id)
+        contentValues.put("nick", nick)
+        contentValues.put("indexName", indexName.replace(" ", ""))
+//            contentValues.put("cookie", cookie);
 
-        for (i in 0 until chat.size){
-            Log.d("Chat Context", chat[i])
-            val posString = chat[i].substringAfter(" // ")
-            val context = chat[i].substringBefore(" // ")
+        editText_chat.setText("")
 
-            if (posString == "left") messageAdapter.addChat(ChatMessage(MSG_LEFT, indexName, nick, context))
-            else messageAdapter.addChat(ChatMessage(MSG_RIGHT, nick, indexName, context))
+        val avatarChatTask: AvatarChatTask = AvatarChatTask(this, messageAdapter, loadChatPath, nick, indexName.replace(" ", ""), contentValues)
+        avatarChatTask.execute()
 
-        }
 
 
 //        for (i in chat){
@@ -112,6 +123,27 @@ class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
+    override fun onBackPressed() {  // 뒤로가기 터치 시
+        super.onBackPressed()
+        Log.d("onBackPressed", "ChatbotActivity")
+//        val intent = Intent()
+//        intent.putExtra("indexName", indexName)
+//        Log.d("NetworkBotCloseTask", "onPostExecute")
+//
+//        this.setResult(this.RESPONSE_CLOSE_BOT, intent)
+//        this.finish()
+//        val contentValues: ContentValues = ContentValues()
+//        contentValues.put("id", id)
+//        contentValues.put("nick", nick)
+////            contentValues.put("cookie", cookie);
+//
+//
+//        val networkBotCloseTask: NetworkBotCloseTask = NetworkBotCloseTask(this, botClosePath, contentValues)
+//        networkBotCloseTask.execute()
+
+    }
+
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
         super.onActivityResult(requestCode, resultCode, data)
@@ -126,7 +158,13 @@ class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
 
     // 액션바 옵션 별 기능
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        android.R.id.home->{
+        android.R.id.home->{        // 액션바에서 뒤로가기 선탵ㄱ 시
+//            val intent = Intent()
+//            intent.putExtra("lateChat", lateChat)
+//            intent.putExtra("indexName", indexName)
+//            Log.d("NetworkBotCloseTask", "onPostExecute")
+//
+//            this.setResult(this.RESPONSE_CLOSE_BOT, intent)
             finish()
             true
         }
@@ -161,7 +199,7 @@ class ChatBotActivity : AppCompatActivity(), View.OnClickListener {
 
             // 내가 입력한 메세지 전송
             val chatMessage:ChatMessage = ChatMessage(MSG_RIGHT, nick, indexName, msg)
-
+//            lateChat.plus("$msg // right")
             Log.d("Right Message", chatMessage.toString())
             messageAdapter.addChat(chatMessage)
             recyclerView.smoothScrollToPosition(messageAdapter.itemCount - 1)
